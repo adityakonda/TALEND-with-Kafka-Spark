@@ -112,19 +112,19 @@
     <routinesParameter id="_oWVDgFdeEeeIzdhs3zGnHA" name="MDM"/>
     <routinesParameter id="_oWe0gFdeEeeIzdhs3zGnHA" name="SQLike"/>
   </parameters>
-  <node componentName="tKafkaInput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="192">
+  <node componentName="tKafkaInput" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="384" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tKafkaInput_1" show="false"/>
     <elementParameter field="CLOSED_LIST" name="OUTPUT_TYPE" value="STRING"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="" show="false"/>
-    <elementParameter field="CLOSED_LIST" name="KAFKA_VERSION" value="KAFKA_0_10_0_1"/>
-    <elementParameter field="TEXT" name="ZOOKEEPER_CONNECT" value="&quot;zk1:port1,zk2:port2,...&quot;" show="false"/>
-    <elementParameter field="TEXT" name="BROKER_LIST" value="&quot;192.168.200.158:2181&quot;"/>
-    <elementParameter field="TEXT" name="KAFKA_TOPIC" value="&quot;mytopic&quot;"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tKafkaConnection_2"/>
+    <elementParameter field="CLOSED_LIST" name="KAFKA_VERSION" value="KAFKA_0_10_0_1" show="false"/>
+    <elementParameter field="TEXT" name="ZOOKEEPER_CONNECT" value="&quot;192.168.200.159:2181&quot;" show="false"/>
+    <elementParameter field="TEXT" name="BROKER_LIST" value="&quot;192.168.200.158:2181&quot;" show="false"/>
+    <elementParameter field="TEXT" name="KAFKA_TOPIC" value="&quot;mydfz&quot;"/>
     <elementParameter field="TEXT" name="GROUP_ID" value="&quot;mygroup&quot;"/>
     <elementParameter field="CHECK" name="RESET_OFFSET" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="AUTO_OFFSET_RESET" value="LARGEST" show="false"/>
-    <elementParameter field="CLOSED_LIST" name="AUTO_OFFSET_RESET_NEW" value="EARLIEST"/>
+    <elementParameter field="CLOSED_LIST" name="AUTO_OFFSET_RESET" value="SMALLEST" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="AUTO_OFFSET_RESET_NEW" value="LATEST"/>
     <elementParameter field="CLOSED_LIST" name="KAFKA_OFFSET_STORAGE" value="ZOOKEEPER" show="false"/>
     <elementParameter field="CHECK" name="KAFKA_DUAL_COMMIT_CHECK" value="true" show="false"/>
     <elementParameter field="CHECK" name="AUTO_COMMIT_OFFSET" value="true"/>
@@ -135,9 +135,9 @@
     <elementParameter field="TEXT" name="BATCH_MAX_SIZE" value="5000" show="false"/>
     <elementParameter field="CHECK" name="USE_BATCH_MESSAGE_TIMEOUT" value="false"/>
     <elementParameter field="TEXT" name="BATCH_MESSAGE_TIMEOUT" value="10000" show="false"/>
-    <elementParameter field="CHECK" name="USE_HTTPS" value="false"/>
+    <elementParameter field="CHECK" name="USE_HTTPS" value="false" show="false"/>
     <elementParameter field="COMPONENT_LIST" name="HTTPS_SETTING" value="" show="false"/>
-    <elementParameter field="CHECK" name="USE_KRB" value="false"/>
+    <elementParameter field="CHECK" name="USE_KRB" value="false" show="false"/>
     <elementParameter field="FILE" name="JAAS_CONF" value="&quot;/etc/kafka/kafka_client_jaas.conf&quot;" show="false"/>
     <elementParameter field="TEXT" name="KRB_SERVICE_NAME" value="&quot;kafka&quot;" show="false"/>
     <elementParameter field="CHECK" name="SET_KINIT_PATH" value="false" show="false"/>
@@ -152,10 +152,13 @@
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="UTF-8" show="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tKafkaInput_1">
-      <column defaultValue="" key="false" length="0" name="payload" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column key="false" length="0" name="payload" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="VALIDATION_REJECT" name="VALIDATION_REJECT">
+      <column comment="" defaultValue="" key="false" length="255" name="errorMessage" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tExtractXMLField" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="192">
+  <node componentName="tExtractXMLField" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tExtractXMLField_1" show="false"/>
     <elementParameter field="PREV_COLUMN_LIST" name="XMLFIELD" value="payload"/>
     <elementParameter field="CHECK" name="USE_ITEMS" value="false" show="false"/>
@@ -184,7 +187,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="192">
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_1" show="false"/>
     <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
     <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
@@ -208,6 +211,22 @@
       <column key="false" length="0" name="payload" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
   </node>
+  <node componentName="tKafkaConnection" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tKafkaConnection_2" show="false"/>
+    <elementParameter field="CLOSED_LIST" name="KAFKA_VERSION" value="KAFKA_0_10_0_1"/>
+    <elementParameter field="TEXT" name="ZOOKEEPER_CONNECT" value="&quot;quickstart.cloudera:2181&quot;"/>
+    <elementParameter field="TEXT" name="BROKER_LIST" value="&quot;quickstart.cloudera:9092&quot;"/>
+    <elementParameter field="CHECK" name="USE_HTTPS" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="HTTPS_SETTING" value="" show="false"/>
+    <elementParameter field="CHECK" name="USE_KRB" value="false"/>
+    <elementParameter field="FILE" name="JAAS_CONF" value="&quot;/etc/kafka/kafka_client_jaas.conf&quot;" show="false"/>
+    <elementParameter field="TEXT" name="KRB_SERVICE_NAME" value="&quot;kafka&quot;" show="false"/>
+    <elementParameter field="CHECK" name="SET_KINIT_PATH" value="false" show="false"/>
+    <elementParameter field="FILE" name="KINIT_PATH" value="&quot;/usr/bin/kinit&quot;" show="false"/>
+    <elementParameter field="CHECK" name="SET_KRB5_CONF" value="false" show="false"/>
+    <elementParameter field="FILE" name="KRB5_CONF" value="&quot;/etc/kafka/krb5.conf&quot;" show="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tKafkaInput_1" offsetLabelX="0" offsetLabelY="0" source="tKafkaInput_1" target="tExtractXMLField_1">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1" show="false"/>
@@ -216,8 +235,16 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tKafkaConnection_2" offsetLabelX="0" offsetLabelY="0" source="tKafkaConnection_2" target="tKafkaInput_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1" show="false"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tKafkaInput_1" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tKafkaConnection_2" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
