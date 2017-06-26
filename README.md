@@ -21,7 +21,7 @@
 ```
 	$  kafka-console-producer --broker-list quickstart.cloudera:9092 --topic mytopic
 ```
-4. ###### Creating Consumer in Kafka######
+4. ###### Creating Consumer in Kafka ######
 ```
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
