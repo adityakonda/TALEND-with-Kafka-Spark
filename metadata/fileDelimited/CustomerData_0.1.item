@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.record="http:///orgomg/cwm/resource/record.ecore">
+  <TalendMetadata:DelimitedFileConnection xmi:id="_smbTsFtkEee6Z9U3i4T8WA" name="CustomerData" dataPackage="_smbTsVtkEee6Z9U3i4T8WA" Server="Localhost 127.0.0.1" FilePath="C:/Users/adity/Desktop/Talend/Datasets/CustomerDataset_Spark.txt" Encoding="UTF-8" FieldSeparatorValue="&quot;\t&quot;" RowSeparatorType="Custom String" RowSeparatorValue="&quot;\n&quot;" UseHeader="true" HeaderValue="1" FirstLineCaption="true" FieldSeparatorType="Tabulation"/>
+  <orgomg.cwm.resource.record:RecordFile xmi:id="_smbTsVtkEee6Z9U3i4T8WA" name="default" dataManager="_smbTsFtkEee6Z9U3i4T8WA">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_smbTsltkEee6Z9U3i4T8WA" id="_XEUdIFtkEee6Z9U3i4T8WA" label="customer">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_smbTs1tkEee6Z9U3i4T8WA" label="id" length="2" talendType="id_Integer" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_smbTtFtkEee6Z9U3i4T8WA" label="last_name" length="12" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_smbTtVtkEee6Z9U3i4T8WA" label="gender" length="1" talendType="id_Character" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_smbTtltkEee6Z9U3i4T8WA" label="state" length="14" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_smbTt1tkEee6Z9U3i4T8WA" label="state_abv" length="20" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+    </ownedElement>
+  </orgomg.cwm.resource.record:RecordFile>
+</xmi:XMI>
