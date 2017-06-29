@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:id="_PXP9cF0JEee7fslAx7QF5A" defaultContext="Default" jobType="Big_Data_Batch" framework="Spark">
+  <context xmi:id="_PXP9cV0JEee7fslAx7QF5A" confirmationNeeded="false" name="Default"/>
+  <parameters xmi:id="_PXP9cl0JEee7fslAx7QF5A">
+    <elementParameter xmi:id="_PXP9c10JEee7fslAx7QF5A" field="TEXT" name="SCREEN_OFFSET_X" value="0" show="false"/>
+    <elementParameter xmi:id="_PXP9dF0JEee7fslAx7QF5A" field="TEXT" name="SCREEN_OFFSET_Y" value="0" show="false"/>
+    <elementParameter xmi:id="_PXP9dV0JEee7fslAx7QF5A" field="TEXT" name="REPOSITORY_CONNECTION_ID" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9dl0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_PROPERTY_TYPENAME" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9d10JEee7fslAx7QF5A" field="TEXT" name="OOZIE_HADOOP_DISTRIBUTION" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9eF0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_HADOOP_VERSION" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9eV0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_ENABLE_KERBEROS" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9el0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_NAME_NODE_PRINCIPAL" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9e10JEee7fslAx7QF5A" field="TEXT" name="OOZIE_USERNAME" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9fF0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_GROUP" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9fV0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_USE_KEYTAB" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9fl0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_KT_PRINCIPAL" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9f10JEee7fslAx7QF5A" field="TEXT" name="OOZIE_KEY_TAB" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9gF0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_ENABLE_OO_KERBEROS" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9gV0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_NAME_NODE_END_POINT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9gl0JEee7fslAx7QF5A" field="TEXT" name="OOZIE_JOB_TRACKER_ENDPOINT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9g10JEee7fslAx7QF5A" field="TEXT" name="OOZIE_END_POINT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9hF0JEee7fslAx7QF5A" field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP9hV0JEee7fslAx7QF5A" field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP9hl0JEee7fslAx7QF5A" field="CHECK" name="MULTI_THREAD_EXECATION" value="false"/>
+    <elementParameter xmi:id="_PXP9h10JEee7fslAx7QF5A" field="TEXT" name="PARALLELIZE_UNIT_SIZE" value="25000"/>
+    <elementParameter xmi:id="_PXP9iF0JEee7fslAx7QF5A" field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="false"/>
+    <elementParameter xmi:id="_PXP9iV0JEee7fslAx7QF5A" field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9il0JEee7fslAx7QF5A" field="RADIO" name="FROM_DATABASE_FLAG_IMPLICIT_CONTEXT" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9i10JEee7fslAx7QF5A" field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9jF0JEee7fslAx7QF5A" field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9jV0JEee7fslAx7QF5A" field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:PROPERTY_TYPE" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9jl0JEee7fslAx7QF5A" field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:REPOSITORY_PROPERTY_TYPE" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9j10JEee7fslAx7QF5A" field="CLOSED_LIST" name="DB_TYPE_IMPLICIT_CONTEXT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9kF0JEee7fslAx7QF5A" field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9kV0JEee7fslAx7QF5A" field="TEXT" name="URL_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9kl0JEee7fslAx7QF5A" field="TABLE" name="DRIVER_JAR_IMPLICIT_CONTEXT" show="false"/>
+    <elementParameter xmi:id="_PXP9k10JEee7fslAx7QF5A" field="TEXT" name="DRIVER_CLASS_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9lF0JEee7fslAx7QF5A" field="TEXT" name="HOST_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9lV0JEee7fslAx7QF5A" field="TEXT" name="PORT_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9ll0JEee7fslAx7QF5A" field="TEXT" name="DBNAME_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9l10JEee7fslAx7QF5A" field="TEXT" name="LOCAL_SERVICE_NAME_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9mF0JEee7fslAx7QF5A" field="TEXT" name="PROPERTIES_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9mV0JEee7fslAx7QF5A" field="TEXT" name="SCHEMA_DB_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9ml0JEee7fslAx7QF5A" field="TEXT" name="USER_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9m10JEee7fslAx7QF5A" field="PASSWORD" name="PASS_IMPLICIT_CONTEXT" value="0RMsyjmybrE=" show="false"/>
+    <elementParameter xmi:id="_PXP9nF0JEee7fslAx7QF5A" field="FILE" name="DBFILE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9nV0JEee7fslAx7QF5A" field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9nl0JEee7fslAx7QF5A" field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9n10JEee7fslAx7QF5A" field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value="Warning" show="false"/>
+    <elementParameter xmi:id="_PXP9oF0JEee7fslAx7QF5A" field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value="Warning" show="false"/>
+    <elementParameter xmi:id="_PXP9oV0JEee7fslAx7QF5A" field="CHECK" name="PRINT_OPERATIONS" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9ol0JEee7fslAx7QF5A" field="CHECK" name="DISABLE_ERROR" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9o10JEee7fslAx7QF5A" field="CHECK" name="DISABLE_WARNINGS" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9pF0JEee7fslAx7QF5A" field="CHECK" name="DISABLE_INFO" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9pV0JEee7fslAx7QF5A" field="CHECK" name="ON_STATCATCHER_FLAG" value="false"/>
+    <elementParameter xmi:id="_PXP9pl0JEee7fslAx7QF5A" field="CHECK" name="ON_LOGCATCHER_FLAG" value="false"/>
+    <elementParameter xmi:id="_PXP9p10JEee7fslAx7QF5A" field="CHECK" name="ON_METERCATCHER_FLAG" value="false"/>
+    <elementParameter xmi:id="_PXP9qF0JEee7fslAx7QF5A" field="CHECK" name="ON_CONSOLE_FLAG" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9qV0JEee7fslAx7QF5A" field="CHECK" name="ON_FILES_FLAG" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9ql0JEee7fslAx7QF5A" field="DIRECTORY" name="FILE_PATH" value="&quot;C:/workspace/.metadata&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9q10JEee7fslAx7QF5A" field="TEXT" name="FILENAME_STATS" value="&quot;stats_file.txt&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9rF0JEee7fslAx7QF5A" field="TEXT" name="FILENAME_LOGS" value="&quot;logs_file.txt&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9rV0JEee7fslAx7QF5A" field="TEXT" name="FILENAME_METTER" value="&quot;meter_file.txt&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9rl0JEee7fslAx7QF5A" field="ENCODING_TYPE" name="ENCODING" value="ISO-8859-15" show="false"/>
+    <elementParameter xmi:id="_PXP9r10JEee7fslAx7QF5A" field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15" show="false"/>
+    <elementParameter xmi:id="_PXP9sF0JEee7fslAx7QF5A" field="CHECK" name="ON_DATABASE_FLAG" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9sV0JEee7fslAx7QF5A" field="CLOSED_LIST" name="DB_TYPE" value="tJDBCOutput" show="false"/>
+    <elementParameter xmi:id="_PXP9sl0JEee7fslAx7QF5A" field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_11" show="false"/>
+    <elementParameter xmi:id="_PXP9s10JEee7fslAx7QF5A" field="TEXT" name="URL" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9tF0JEee7fslAx7QF5A" field="TABLE" name="DRIVER_JAR" show="false"/>
+    <elementParameter xmi:id="_PXP9tV0JEee7fslAx7QF5A" field="TEXT" name="DRIVER_CLASS" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9tl0JEee7fslAx7QF5A" field="TEXT" name="HOST" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9t10JEee7fslAx7QF5A" field="TEXT" name="PORT" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9uF0JEee7fslAx7QF5A" field="TEXT" name="DATASOURCE" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9uV0JEee7fslAx7QF5A" field="TEXT" name="DBNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9ul0JEee7fslAx7QF5A" field="TEXT" name="LOCAL_SERVICE_NAME" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9u10JEee7fslAx7QF5A" field="TEXT" name="PROPERTIES" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9vF0JEee7fslAx7QF5A" field="TEXT" name="SCHEMA_DB" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9vV0JEee7fslAx7QF5A" field="TEXT" name="USER" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9vl0JEee7fslAx7QF5A" field="PASSWORD" name="PASS" value="0RMsyjmybrE=" show="false"/>
+    <elementParameter xmi:id="_PXP9v10JEee7fslAx7QF5A" field="FILE" name="DBFILE" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9wF0JEee7fslAx7QF5A" field="DBTABLE" name="TABLE_STATS" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9wV0JEee7fslAx7QF5A" field="DBTABLE" name="TABLE_LOGS" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9wl0JEee7fslAx7QF5A" field="DBTABLE" name="TABLE_METER" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9w10JEee7fslAx7QF5A" field="CHECK" name="CATCH_RUNTIME_ERRORS" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP9xF0JEee7fslAx7QF5A" field="CHECK" name="CATCH_USER_ERRORS" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP9xV0JEee7fslAx7QF5A" field="CHECK" name="CATCH_USER_WARNING" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP9xl0JEee7fslAx7QF5A" field="CHECK" name="CATCH_REALTIME_STATS" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9x10JEee7fslAx7QF5A" field="TEXT" name="HEADERFOOTER_HEADERID" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9yF0JEee7fslAx7QF5A" field="CHECK" name="HEADER_ENABLED" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9yV0JEee7fslAx7QF5A" field="TEXT" name="HEADER_LIBRARY" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9yl0JEee7fslAx7QF5A" field="TEXT" name="HEADER_CODE" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9y10JEee7fslAx7QF5A" field="TEXT" name="HEADER_IMPORT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9zF0JEee7fslAx7QF5A" field="TEXT" name="HEADERFOOTER_FOOTERID" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9zV0JEee7fslAx7QF5A" field="CHECK" name="FOOTER_ENABLED" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP9zl0JEee7fslAx7QF5A" field="TEXT" name="FOOTER_LIBRARY" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9z10JEee7fslAx7QF5A" field="TEXT" name="FOOTER_CODE" value="" show="false"/>
+    <elementParameter xmi:id="_PXP90F0JEee7fslAx7QF5A" field="TEXT" name="FOOTER_IMPORT" value="" show="false"/>
+    <elementParameter xmi:id="_PXP90V0JEee7fslAx7QF5A" field="TECHNICAL" name="MR_PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter xmi:id="_PXP90l0JEee7fslAx7QF5A" field="TECHNICAL" name="MR_PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-lzPAFdhEeeIzdhs3zGnHA" show="false"/>
+    <elementParameter xmi:id="_PXP9010JEee7fslAx7QF5A" field="CLOSED_LIST" name="DISTRIBUTION" value="CLOUDERA"/>
+    <elementParameter xmi:id="_PXP91F0JEee7fslAx7QF5A" field="CLOSED_LIST" name="MR_VERSION" value="Cloudera_CDH5_8"/>
+    <elementParameter xmi:id="_PXP91V0JEee7fslAx7QF5A" field="HADOOP_DISTRIBUTION" name="MAPREDUCE" value=""/>
+    <elementParameter xmi:id="_PXP91l0JEee7fslAx7QF5A" field="HADOOP_JARS_DIALOG" name="HADOOP_CUSTOM_JARS" value="" show="false"/>
+    <elementParameter xmi:id="_PXP9110JEee7fslAx7QF5A" field="CHECK" name="USE_YARN" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP92F0JEee7fslAx7QF5A" field="CHECK" name="CROSS_PLATFORM_SUBMISSION" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP92V0JEee7fslAx7QF5A" field="TEXT" name="NAMENODE" value="&quot;hdfs://quickstart.cloudera:8020&quot;"/>
+    <elementParameter xmi:id="_PXP92l0JEee7fslAx7QF5A" field="TEXT" name="JOBTRACKER" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9210JEee7fslAx7QF5A" field="TEXT" name="RESOURCE_MANAGER" value="&quot;quickstart.cloudera:8032&quot;"/>
+    <elementParameter xmi:id="_PXP93F0JEee7fslAx7QF5A" field="CHECK" name="SET_SCHEDULER_ADDRESS" value="true"/>
+    <elementParameter xmi:id="_PXP93V0JEee7fslAx7QF5A" field="TEXT" name="RESOURCEMANAGER_SCHEDULER_ADDRESS" value="&quot;quickstart.cloudera:8030&quot;"/>
+    <elementParameter xmi:id="_PXP93l0JEee7fslAx7QF5A" field="CHECK" name="SET_JOBHISTORY_ADDRESS" value="true"/>
+    <elementParameter xmi:id="_PXP9310JEee7fslAx7QF5A" field="TEXT" name="JOBHISTORY_ADDRESS" value="&quot;quickstart.cloudera:10020&quot;"/>
+    <elementParameter xmi:id="_PXP94F0JEee7fslAx7QF5A" field="CHECK" name="SET_STAGING_DIRECTORY" value="true"/>
+    <elementParameter xmi:id="_PXP94V0JEee7fslAx7QF5A" field="TEXT" name="STAGING_DIRECTORY" value="&quot;/user&quot;"/>
+    <elementParameter xmi:id="_PXP94l0JEee7fslAx7QF5A" field="CHECK" name="USE_DATANODE_HOSTNAME" value="true"/>
+    <elementParameter xmi:id="_PXP9410JEee7fslAx7QF5A" field="CHECK" name="USE_KRB" value="false"/>
+    <elementParameter xmi:id="_PXP95F0JEee7fslAx7QF5A" field="TEXT" name="NAMENODE_PRINCIPAL" value="&quot;nn/_HOST@EXAMPLE.COM&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP95V0JEee7fslAx7QF5A" field="TEXT" name="JOBTRACKER_PRINCIPAL" value="&quot;jt/_HOST@EXAMPLE.COM&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP95l0JEee7fslAx7QF5A" field="TEXT" name="RESOURCEMANAGER_PRINCIPAL" value="&quot;yarn/_HOST@EXAMPLE.COM&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9510JEee7fslAx7QF5A" field="TEXT" name="JOBHISTORY_PRINCIPAL" value="&quot;mapred/_HOST@EXAMPLE.COM&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP96F0JEee7fslAx7QF5A" field="CHECK" name="USE_KEYTAB" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP96V0JEee7fslAx7QF5A" field="TEXT" name="PRINCIPAL" value="&quot;hdfs&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP96l0JEee7fslAx7QF5A" field="FILE" name="KEYTAB_PATH" value="&quot;/tmp/hdfs.headless.keytab&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9610JEee7fslAx7QF5A" field="CHECK" name="USE_MAPRTICKET" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP97F0JEee7fslAx7QF5A" field="PASSWORD" name="MAPRTICKET_PASSWORD" value="0RMsyjmybrE=" show="false"/>
+    <elementParameter xmi:id="_PXP97V0JEee7fslAx7QF5A" field="TEXT" name="MAPRTICKET_CLUSTER" value="&quot;demo.mapr.com&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP97l0JEee7fslAx7QF5A" field="TEXT" name="MAPRTICKET_DURATION" value="86400L" show="false"/>
+    <elementParameter xmi:id="_PXP9710JEee7fslAx7QF5A" field="CHECK" name="SET_MAPR_HOME_DIR" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP98F0JEee7fslAx7QF5A" field="TEXT" name="MAPR_HOME_DIR" value="&quot;/opt/mapr&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP98V0JEee7fslAx7QF5A" field="CHECK" name="SET_HADOOP_LOGIN" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP98l0JEee7fslAx7QF5A" field="TEXT" name="HADOOP_LOGIN" value="&quot;kerberos&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9810JEee7fslAx7QF5A" field="CHECK" name="PRELOAD_AUTHENTIFICATION" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP99F0JEee7fslAx7QF5A" field="TEXT" name="USERNAME" value="&quot;cloudera&quot;"/>
+    <elementParameter xmi:id="_PXP99V0JEee7fslAx7QF5A" field="TEXT" name="SERVER_PATH_SEPARATOR" value="&quot;:&quot;"/>
+    <elementParameter xmi:id="_PXP99l0JEee7fslAx7QF5A" field="TEXT" name="TEMP_FOLDER" value="&quot;/tmp&quot;"/>
+    <elementParameter xmi:id="_PXP9910JEee7fslAx7QF5A" field="CHECK" name="RM_TEMP_FOLDER" value="true"/>
+    <elementParameter xmi:id="_PXP9-F0JEee7fslAx7QF5A" field="CHECK" name="MAPRED_JOB_COMPRESS_MAP_IO" value="true"/>
+    <elementParameter xmi:id="_PXP9-V0JEee7fslAx7QF5A" field="CHECK" name="USE_CLOUDERA_NAVIGATOR" value="false"/>
+    <elementParameter xmi:id="_PXP9-l0JEee7fslAx7QF5A" field="TEXT" name="CLOUDERA_NAVIGATOR_USERNAME" value="&quot;username&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9-10JEee7fslAx7QF5A" field="PASSWORD" name="CLOUDERA_NAVIGATOR_PASSWORD" value="PoLvNyVG2XWndNDdLn696A==" show="false"/>
+    <elementParameter xmi:id="_PXP9_F0JEee7fslAx7QF5A" field="TEXT" name="CLOUDERA_NAVIGATOR_URL" value="&quot;http://localhost:7187/api/v8/&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9_V0JEee7fslAx7QF5A" field="TEXT" name="CLOUDERA_NAVIGATOR_METADATA_URL" value="&quot;http://localhost:7187/api/v8/metadata/plugin&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9_l0JEee7fslAx7QF5A" field="TEXT" name="CLOUDERA_NAVIGATOR_CLIENT_URL" value="&quot;http://localhost&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP9_10JEee7fslAx7QF5A" field="CHECK" name="CLOUDERA_NAVIGATOR_AUTOCOMMIT" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-AF0JEee7fslAx7QF5A" field="CHECK" name="CLOUDERA_NAVIGATOR_DISABLE_SSL_VALIDATION" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-AV0JEee7fslAx7QF5A" field="CHECK" name="CLOUDERA_NAVIGATOR_DIE_ON_ERROR" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP-Al0JEee7fslAx7QF5A" field="TABLE" name="HADOOP_ADVANCED_PROPERTIES"/>
+    <elementParameter xmi:id="_PXP-A10JEee7fslAx7QF5A" field="CHECK" name="USE_HDFS_ENCRYPTION" value="false"/>
+    <elementParameter xmi:id="_PXP-BF0JEee7fslAx7QF5A" field="TEXT" name="HDFS_ENCRYPTION_KEY_PROVIDER" value="&quot;kms://http@localhost:16000/kms&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-BV0JEee7fslAx7QF5A" field="TEXT" name="MAPRED_JOB_MAP_MEMORY_MB" value="&quot;1000&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-Bl0JEee7fslAx7QF5A" field="TEXT" name="MAPRED_JOB_REDUCE_MEMORY_MB" value="&quot;1000&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-B10JEee7fslAx7QF5A" field="CHECK" name="SET_MEMORY" value="false"/>
+    <elementParameter xmi:id="_PXP-CF0JEee7fslAx7QF5A" field="TEXT" name="MAPREDUCE_MAP_MEMORY_MB" value="&quot;1024&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-CV0JEee7fslAx7QF5A" field="TEXT" name="MAPREDUCE_REDUCE_MEMORY_MB" value="&quot;1024&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-Cl0JEee7fslAx7QF5A" field="TEXT" name="YARN_APP_MAPREDUCE_AM_RESOURCE_MB" value="&quot;1024&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-C10JEee7fslAx7QF5A" field="TEXT" name="WEBHCAT_HOST" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-DF0JEee7fslAx7QF5A" field="TEXT" name="WEBHCAT_PORT" value="&quot;443&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-DV0JEee7fslAx7QF5A" field="TEXT" name="WEBHCAT_USERNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-Dl0JEee7fslAx7QF5A" field="TEXT" name="STATUSDIR" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-D10JEee7fslAx7QF5A" field="TEXT" name="HDINSIGHT_USERNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-EF0JEee7fslAx7QF5A" field="PASSWORD" name="HDINSIGHT_PASSWORD" value="0RMsyjmybrE=" show="false"/>
+    <elementParameter xmi:id="_PXP-EV0JEee7fslAx7QF5A" field="TEXT" name="WASB_HOST" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-El0JEee7fslAx7QF5A" field="TEXT" name="WASB_CONTAINER" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-E10JEee7fslAx7QF5A" field="TEXT" name="WASB_USERNAME" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-FF0JEee7fslAx7QF5A" field="PASSWORD" name="WASB_PASSWORD" value="0RMsyjmybrE=" show="false"/>
+    <elementParameter xmi:id="_PXP-FV0JEee7fslAx7QF5A" field="TEXT" name="REMOTE_FOLDER" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-Fl0JEee7fslAx7QF5A" field="CHECK" name="USE_ATLAS" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-F10JEee7fslAx7QF5A" field="TEXT" name="ATLAS_URL" value="&quot;http://localhost:21000&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-GF0JEee7fslAx7QF5A" field="TEXT" name="ATLAS_USERNAME" value="&quot;admin&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-GV0JEee7fslAx7QF5A" field="PASSWORD" name="ATLAS_PASSWORD" value="0RMsyjmybrE=" show="false"/>
+    <elementParameter xmi:id="_PXP-Gl0JEee7fslAx7QF5A" field="CHECK" name="SET_ATLAS_APPLICATION_PROPERTIES" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-G10JEee7fslAx7QF5A" field="TEXT" name="ATLAS_APPLICATION_PROPERTIES" value="&quot;/user/atlas/atlas-application.properties&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-HF0JEee7fslAx7QF5A" field="CHECK" name="ATLAS_DIE_ON_ERROR" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-HV0JEee7fslAx7QF5A" field="TEXT" name="MAPREDUCE_INFOS" value="MAPREDUCE_INFOS" show="false"/>
+    <routinesParameter xmi:id="_Jjx7MltiEee6Z9U3i4T8WA" id="_oWL5kFdeEeeIzdhs3zGnHA" name="DQTechnical"/>
+    <routinesParameter xmi:id="_Jjx7M1tiEee6Z9U3i4T8WA" id="_oVvNoFdeEeeIzdhs3zGnHA" name="DataMasking"/>
+    <routinesParameter xmi:id="_Jjx7NFtiEee6Z9U3i4T8WA" id="_oPZVEldeEeeIzdhs3zGnHA" name="DataOperation"/>
+    <routinesParameter xmi:id="_Jjx7NVtiEee6Z9U3i4T8WA" id="_oWCIkFdeEeeIzdhs3zGnHA" name="DataQualityDependencies"/>
+    <routinesParameter xmi:id="_Jjx7NltiEee6Z9U3i4T8WA" id="_oV4-oFdeEeeIzdhs3zGnHA" name="DataQuality"/>
+    <routinesParameter xmi:id="_Jjx7N1tiEee6Z9U3i4T8WA" id="_oWCIlldeEeeIzdhs3zGnHA" name="DqStringHandling"/>
+    <routinesParameter xmi:id="_Jjx7OFtiEee6Z9U3i4T8WA" id="_oWVDgFdeEeeIzdhs3zGnHA" name="MDM"/>
+    <routinesParameter xmi:id="_Jjx7OVtiEee6Z9U3i4T8WA" id="_oTHXcFdeEeeIzdhs3zGnHA" name="Mathematical"/>
+    <routinesParameter xmi:id="_Jjx7OltiEee6Z9U3i4T8WA" id="_oTRIcFdeEeeIzdhs3zGnHA" name="Numeric"/>
+    <routinesParameter xmi:id="_Jjx7O1tiEee6Z9U3i4T8WA" id="_oTa5cFdeEeeIzdhs3zGnHA" name="Relational"/>
+    <routinesParameter xmi:id="_Jjx7PFtiEee6Z9U3i4T8WA" id="_oWe0gFdeEeeIzdhs3zGnHA" name="SQLike"/>
+    <routinesParameter xmi:id="_Jjx7PVtiEee6Z9U3i4T8WA" id="_oVIwsFdeEeeIzdhs3zGnHA" name="StringHandling"/>
+    <routinesParameter xmi:id="_Jjx7PltiEee6Z9U3i4T8WA" id="_oVShsFdeEeeIzdhs3zGnHA" name="TalendDataGenerator"/>
+    <routinesParameter xmi:id="_Jjx7P1tiEee6Z9U3i4T8WA" id="_oVcSsFdeEeeIzdhs3zGnHA" name="TalendDate"/>
+    <routinesParameter xmi:id="_Jjx7QFtiEee6Z9U3i4T8WA" id="_oVlcoFdeEeeIzdhs3zGnHA" name="TalendString"/>
+  </parameters>
+  <node xmi:id="_PXP-Hl0JEee7fslAx7QF5A" componentName="tFileInputDelimited" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="96" posY="288">
+    <elementParameter xmi:id="_PXP-H10JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1" show="false"/>
+    <elementParameter xmi:id="_PXP-IF0JEee7fslAx7QF5A" field="CHECK" name="DEFINE_STORAGE_CONFIGURATION" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP-IV0JEee7fslAx7QF5A" field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY" show="false"/>
+    <elementParameter xmi:id="_PXP-Il0JEee7fslAx7QF5A" field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_Mb23YVtpEee6Z9U3i4T8WA - customer" show="false"/>
+    <elementParameter xmi:id="_PXP-I10JEee7fslAx7QF5A" field="TEXT" name="FIELD" value="line" show="false"/>
+    <elementParameter xmi:id="_PXP-JF0JEee7fslAx7QF5A" field="BOTH_HADOOP" name="FILENAME" value="&quot;/user/cloudera/sparkData/PigDataset.txt&quot;"/>
+    <elementParameter xmi:id="_PXP-JV0JEee7fslAx7QF5A" field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter xmi:id="_PXP-Jl0JEee7fslAx7QF5A" field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter xmi:id="_PXP-J10JEee7fslAx7QF5A" field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-KF0JEee7fslAx7QF5A" field="TEXT" name="FIELDSEPARATOR" value="&quot;\t&quot;"/>
+    <elementParameter xmi:id="_PXP-KV0JEee7fslAx7QF5A" field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-Kl0JEee7fslAx7QF5A" field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-K10JEee7fslAx7QF5A" field="CHECK" name="CSV_OPTION" value="false"/>
+    <elementParameter xmi:id="_PXP-LF0JEee7fslAx7QF5A" field="TEXT" name="HEADER" value="1"/>
+    <elementParameter xmi:id="_PXP-LV0JEee7fslAx7QF5A" field="CHECK" name="REMOVE_EMPTY_ROW" value="false"/>
+    <elementParameter xmi:id="_PXP-Ll0JEee7fslAx7QF5A" field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter xmi:id="_PXP-L10JEee7fslAx7QF5A" field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-MF0JEee7fslAx7QF5A" field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-MV0JEee7fslAx7QF5A" field="CHECK" name="CUSTOM_ENCODING" value="false"/>
+    <elementParameter xmi:id="_PXP-Ml0JEee7fslAx7QF5A" field="ENCODING_TYPE" name="ENCODING" value="&quot;UTF-8&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-M10JEee7fslAx7QF5A" field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="UTF-8" show="false"/>
+    <elementParameter xmi:id="_PXP-NF0JEee7fslAx7QF5A" field="CHECK" name="TRIMALL" value="false"/>
+    <elementParameter xmi:id="_PXP-NV0JEee7fslAx7QF5A" field="TABLE" name="TRIMSELECT">
+      <elementValue xmi:id="_PXP-Nl0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="id"/>
+      <elementValue xmi:id="_PXP-N10JEee7fslAx7QF5A" elementRef="TRIM" value="false"/>
+      <elementValue xmi:id="_PXP-OF0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="first_name"/>
+      <elementValue xmi:id="_PXP-OV0JEee7fslAx7QF5A" elementRef="TRIM" value="false"/>
+      <elementValue xmi:id="_PXP-Ol0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue xmi:id="_PXP-O10JEee7fslAx7QF5A" elementRef="TRIM" value="false"/>
+      <elementValue xmi:id="_PXP-PF0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="product"/>
+      <elementValue xmi:id="_PXP-PV0JEee7fslAx7QF5A" elementRef="TRIM" value="false"/>
+      <elementValue xmi:id="_PXP-Pl0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="state"/>
+      <elementValue xmi:id="_PXP-P10JEee7fslAx7QF5A" elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter xmi:id="_PXP-QF0JEee7fslAx7QF5A" field="CHECK" name="CHECK_FIELDS_NUM" value="false"/>
+    <elementParameter xmi:id="_PXP-QV0JEee7fslAx7QF5A" field="CHECK" name="CHECK_DATE" value="false"/>
+    <elementParameter xmi:id="_PXP-Ql0JEee7fslAx7QF5A" field="CHECK" name="ENABLE_DECODE" value="false"/>
+    <elementParameter xmi:id="_PXP-Q10JEee7fslAx7QF5A" field="TABLE" name="DECODE_COLS" show="false">
+      <elementValue xmi:id="_PXP-RF0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="id"/>
+      <elementValue xmi:id="_PXP-RV0JEee7fslAx7QF5A" elementRef="DECODE" value="false"/>
+      <elementValue xmi:id="_PXP-Rl0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="first_name"/>
+      <elementValue xmi:id="_PXP-R10JEee7fslAx7QF5A" elementRef="DECODE" value="false"/>
+      <elementValue xmi:id="_PXP-SF0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="gender"/>
+      <elementValue xmi:id="_PXP-SV0JEee7fslAx7QF5A" elementRef="DECODE" value="false"/>
+      <elementValue xmi:id="_PXP-Sl0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="product"/>
+      <elementValue xmi:id="_PXP-S10JEee7fslAx7QF5A" elementRef="DECODE" value="false"/>
+      <elementValue xmi:id="_PXP-TF0JEee7fslAx7QF5A" elementRef="SCHEMA_COLUMN" value="state"/>
+      <elementValue xmi:id="_PXP-TV0JEee7fslAx7QF5A" elementRef="DECODE" value="false"/>
+    </elementParameter>
+    <elementParameter xmi:id="_PXP-Tl0JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-T10JEee7fslAx7QF5A" connector="FLOW" label="customer" name="tFileInputDelimited_1">
+      <column xmi:id="_PXP-UF0JEee7fslAx7QF5A" comment="" key="false" length="2" name="id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer" usefulColumn="true"/>
+      <column xmi:id="_PXP-UV0JEee7fslAx7QF5A" comment="" key="false" length="13" name="first_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-Ul0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-U10JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-VF0JEee7fslAx7QF5A" comment="" key="false" length="2" name="state" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata xmi:id="_PXP-VV0JEee7fslAx7QF5A" connector="REJECT" label="customer" name="REJECT">
+      <column xmi:id="_PXP-Vl0JEee7fslAx7QF5A" comment="" key="false" length="2" name="id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer" usefulColumn="true"/>
+      <column xmi:id="_PXP-V10JEee7fslAx7QF5A" comment="" key="false" length="13" name="first_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-WF0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-WV0JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-Wl0JEee7fslAx7QF5A" comment="" key="false" length="2" name="state" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-W10JEee7fslAx7QF5A" defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column xmi:id="_PXP-XF0JEee7fslAx7QF5A" defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column xmi:id="_PXP-XV0JEee7fslAx7QF5A" defaultValue="" key="false" length="255" name="inputLine" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+    <metadata xmi:id="_PXP-Xl0JEee7fslAx7QF5A" connector="INTERMEDIATE" name="INTERMEDIATE">
+      <column xmi:id="_PXP-X10JEee7fslAx7QF5A" defaultValue="" key="false" length="255" name="line" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node xmi:id="_PXP-YF0JEee7fslAx7QF5A" componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="288">
+    <elementParameter xmi:id="_PXP-YV0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tMap_1" show="false"/>
+    <elementParameter xmi:id="_PXP-Yl0JEee7fslAx7QF5A" field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter xmi:id="_PXP-Y10JEee7fslAx7QF5A" field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter xmi:id="_PXP-ZF0JEee7fslAx7QF5A" field="CHECK" name="REPLICATED_JOIN" value="false"/>
+    <elementParameter xmi:id="_PXP-ZV0JEee7fslAx7QF5A" field="IMAGE" name="PREVIEW" value="_PKYmIF0JEee7fslAx7QF5A-tMap_1-PREVIEW.bmp"/>
+    <elementParameter xmi:id="_PXP-Zl0JEee7fslAx7QF5A" field="CHECK" name="LKUP_PARALLELIZE" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-Z10JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-aF0JEee7fslAx7QF5A" connector="FLOW" label="output" name="output">
+      <column xmi:id="_PXP-aV0JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-al0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <nodeData xsi:type="MapperData" xmi:id="_PXP-a10JEee7fslAx7QF5A">
+      <uiProperties xmi:id="_PXP-bF0JEee7fslAx7QF5A"/>
+      <varTables xmi:id="_PXP-bV0JEee7fslAx7QF5A" sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <outputTables xmi:id="_PXP-bl0JEee7fslAx7QF5A" sizeState="INTERMEDIATE" name="output" expressionFilter="row1.state.equals(&quot;NY&quot;)" activateExpressionFilter="true">
+        <mapperTableEntries xmi:id="_PXP-b10JEee7fslAx7QF5A" name="product" expression="row1.product " type="id_String" nullable="true"/>
+        <mapperTableEntries xmi:id="_PXP-cF0JEee7fslAx7QF5A" name="gender" expression="row1.gender " type="id_String" nullable="true"/>
+      </outputTables>
+      <inputTables xmi:id="_PXP-cV0JEee7fslAx7QF5A" sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries xmi:id="_PXP-cl0JEee7fslAx7QF5A" name="id" type="id_Integer" nullable="true"/>
+        <mapperTableEntries xmi:id="_PXP-c10JEee7fslAx7QF5A" name="first_name" type="id_String" nullable="true"/>
+        <mapperTableEntries xmi:id="_PXP-dF0JEee7fslAx7QF5A" name="gender" type="id_String" nullable="true"/>
+        <mapperTableEntries xmi:id="_PXP-dV0JEee7fslAx7QF5A" name="product" type="id_String" nullable="true"/>
+        <mapperTableEntries xmi:id="_PXP-dl0JEee7fslAx7QF5A" name="state" type="id_String" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node xmi:id="_PXP-d10JEee7fslAx7QF5A" componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="608" posY="288">
+    <elementParameter xmi:id="_PXP-eF0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tAggregateRow_1" show="false"/>
+    <elementParameter xmi:id="_PXP-eV0JEee7fslAx7QF5A" field="TABLE" name="GROUPBYS">
+      <elementValue xmi:id="_PXP-el0JEee7fslAx7QF5A" elementRef="OUTPUT_COLUMN" value="product"/>
+      <elementValue xmi:id="_PXP-e10JEee7fslAx7QF5A" elementRef="INPUT_COLUMN" value="product"/>
+      <elementValue xmi:id="_PXP-fF0JEee7fslAx7QF5A" elementRef="OUTPUT_COLUMN" value="gender"/>
+      <elementValue xmi:id="_PXP-fV0JEee7fslAx7QF5A" elementRef="INPUT_COLUMN" value="gender"/>
+    </elementParameter>
+    <elementParameter xmi:id="_PXP-fl0JEee7fslAx7QF5A" field="TABLE" name="OPERATIONS">
+      <elementValue xmi:id="_PXP-f10JEee7fslAx7QF5A" elementRef="OUTPUT_COLUMN" value="count"/>
+      <elementValue xmi:id="_PXP-gF0JEee7fslAx7QF5A" elementRef="FUNCTION" value="count"/>
+      <elementValue xmi:id="_PXP-gV0JEee7fslAx7QF5A" elementRef="INPUT_COLUMN" value="product"/>
+      <elementValue xmi:id="_PXP-gl0JEee7fslAx7QF5A" elementRef="IGNORE_NULL" value="true"/>
+    </elementParameter>
+    <elementParameter xmi:id="_PXP-g10JEee7fslAx7QF5A" field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter xmi:id="_PXP-hF0JEee7fslAx7QF5A" field="CHECK" name="USE_FINANCIAL_PRECISION" value="false"/>
+    <elementParameter xmi:id="_PXP-hV0JEee7fslAx7QF5A" field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter xmi:id="_PXP-hl0JEee7fslAx7QF5A" field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter xmi:id="_PXP-h10JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-iF0JEee7fslAx7QF5A" connector="FLOW" label="output" name="tAggregateRow_1">
+      <column xmi:id="_PXP-iV0JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-il0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-i10JEee7fslAx7QF5A" comment="" key="false" length="20" name="count" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="20" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node xmi:id="_PXP-jF0JEee7fslAx7QF5A" componentName="tSortRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="800" posY="288">
+    <elementParameter xmi:id="_PXP-jV0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tSortRow_1" show="false"/>
+    <elementParameter xmi:id="_PXP-jl0JEee7fslAx7QF5A" field="TABLE" name="CRITERIA">
+      <elementValue xmi:id="_PXP-j10JEee7fslAx7QF5A" elementRef="COLNAME" value="product"/>
+      <elementValue xmi:id="_PXP-kF0JEee7fslAx7QF5A" elementRef="SORT" value="alpha"/>
+      <elementValue xmi:id="_PXP-kV0JEee7fslAx7QF5A" elementRef="ORDER" value="asc"/>
+    </elementParameter>
+    <elementParameter xmi:id="_PXP-kl0JEee7fslAx7QF5A" field="TEXT" name="QUANTILES_FILENAME" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-k10JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-lF0JEee7fslAx7QF5A" connector="FLOW" label="output" name="tSortRow_1">
+      <column xmi:id="_PXP-lV0JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-ll0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-l10JEee7fslAx7QF5A" comment="" key="false" length="20" name="count" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="20" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node xmi:id="_PXP-mF0JEee7fslAx7QF5A" componentName="tReplicate" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="288">
+    <elementParameter xmi:id="_PXP-mV0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tReplicate_1" show="false"/>
+    <elementParameter xmi:id="_PXP-ml0JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-m10JEee7fslAx7QF5A" connector="FLOW" label="output" name="tReplicate_1">
+      <column xmi:id="_PXP-nF0JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-nV0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-nl0JEee7fslAx7QF5A" comment="" key="false" length="20" name="count" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="20" usefulColumn="true"/>
+    </metadata>
+    <metadata xmi:id="_PXP-n10JEee7fslAx7QF5A" connector="SPARKCOMBINE" name="SPARKCOMBINE"/>
+  </node>
+  <node xmi:id="_PXP-oF0JEee7fslAx7QF5A" componentName="tFileOutputDelimited" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="160">
+    <elementParameter xmi:id="_PXP-oV0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tFileOutputDelimited_1" show="false"/>
+    <elementParameter xmi:id="_PXP-ol0JEee7fslAx7QF5A" field="CHECK" name="DEFINE_STORAGE_CONFIGURATION" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP-o10JEee7fslAx7QF5A" field="BOTH_HADOOP" name="FOLDER" value="&quot;/user/cloudera/output/demilited1&quot;"/>
+    <elementParameter xmi:id="_PXP-pF0JEee7fslAx7QF5A" field="CLOSED_LIST" name="FILE_ACTION" value="OVERWRITE"/>
+    <elementParameter xmi:id="_PXP-pV0JEee7fslAx7QF5A" field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter xmi:id="_PXP-pl0JEee7fslAx7QF5A" field="CHECK" name="OS_LINE_SEPARATOR_AS_ROW_SEPARATOR" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP-p10JEee7fslAx7QF5A" field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-qF0JEee7fslAx7QF5A" field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;"/>
+    <elementParameter xmi:id="_PXP-qV0JEee7fslAx7QF5A" field="CHECK" name="INCLUDEHEADER" value="false"/>
+    <elementParameter xmi:id="_PXP-ql0JEee7fslAx7QF5A" field="CHECK" name="CUSTOM_ENCODING" value="false"/>
+    <elementParameter xmi:id="_PXP-q10JEee7fslAx7QF5A" field="ENCODING_TYPE" name="ENCODING" value="&quot;UTF-8&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-rF0JEee7fslAx7QF5A" field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="UTF-8" show="false"/>
+    <elementParameter xmi:id="_PXP-rV0JEee7fslAx7QF5A" field="CHECK" name="COMPRESS" value="false"/>
+    <elementParameter xmi:id="_PXP-rl0JEee7fslAx7QF5A" field="CLOSED_LIST" name="COMPRESSION" value="GZIP" show="false"/>
+    <elementParameter xmi:id="_PXP-r10JEee7fslAx7QF5A" field="CHECK" name="MERGE_RESULT" value="false"/>
+    <elementParameter xmi:id="_PXP-sF0JEee7fslAx7QF5A" field="FILE_HADOOP" name="MERGE_PATH" value="&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-sV0JEee7fslAx7QF5A" field="CHECK" name="REMOVE_FILE" value="false" show="false"/>
+    <elementParameter xmi:id="_PXP-sl0JEee7fslAx7QF5A" field="CHECK" name="REPLACE_FILE" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP-s10JEee7fslAx7QF5A" field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter xmi:id="_PXP-tF0JEee7fslAx7QF5A" field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-tV0JEee7fslAx7QF5A" field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-tl0JEee7fslAx7QF5A" field="CHECK" name="CSV_OPTION" value="false"/>
+    <elementParameter xmi:id="_PXP-t10JEee7fslAx7QF5A" field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-uF0JEee7fslAx7QF5A" field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;" show="false"/>
+    <elementParameter xmi:id="_PXP-uV0JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-ul0JEee7fslAx7QF5A" connector="FLOW" label="output" name="tFileOutputDelimited_1">
+      <column xmi:id="_PXP-u10JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-vF0JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-vV0JEee7fslAx7QF5A" comment="" key="false" length="20" name="count" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="20" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node xmi:id="_PXP-vl0JEee7fslAx7QF5A" componentName="tFileOutputParquet" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="416">
+    <elementParameter xmi:id="_PXP-v10JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tFileOutputParquet_1" show="false"/>
+    <elementParameter xmi:id="_PXP-wF0JEee7fslAx7QF5A" field="CHECK" name="DEFINE_STORAGE_CONFIGURATION" value="true" show="false"/>
+    <elementParameter xmi:id="_PXP-wV0JEee7fslAx7QF5A" field="BOTH_HADOOP" name="FILENAME" value="&quot;/user/cloudera/output/parquet1&quot;"/>
+    <elementParameter xmi:id="_PXP-wl0JEee7fslAx7QF5A" field="CLOSED_LIST" name="FILE_ACTION" value="OVERWRITE"/>
+    <elementParameter xmi:id="_PXP-w10JEee7fslAx7QF5A" field="CLOSED_LIST" name="COMPRESSION" value="UNCOMPRESSED"/>
+    <elementParameter xmi:id="_PXP-xF0JEee7fslAx7QF5A" field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata xmi:id="_PXP-xV0JEee7fslAx7QF5A" connector="FLOW" label="output" name="tFileOutputParquet_1">
+      <column xmi:id="_PXP-xl0JEee7fslAx7QF5A" comment="" key="false" length="20" name="count" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="20" usefulColumn="true"/>
+      <column xmi:id="_PXP-x10JEee7fslAx7QF5A" comment="" key="false" length="6" name="gender" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+      <column xmi:id="_PXP-yF0JEee7fslAx7QF5A" comment="" key="false" length="35" name="product" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <connection xmi:id="_PXP-yV0JEee7fslAx7QF5A" connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tMap_1">
+    <elementParameter xmi:id="_PXP-yl0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="row1" show="false"/>
+  </connection>
+  <connection xmi:id="_PXP-y10JEee7fslAx7QF5A" connectorName="FLOW" label="output" lineStyle="0" metaname="output" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tAggregateRow_1">
+    <elementParameter xmi:id="_PXP-zF0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="output" show="false"/>
+  </connection>
+  <connection xmi:id="_PXP-zV0JEee7fslAx7QF5A" connectorName="FLOW" label="row2" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tSortRow_1">
+    <elementParameter xmi:id="_PXP-zl0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
+  </connection>
+  <connection xmi:id="_PXP-z10JEee7fslAx7QF5A" connectorName="FLOW" label="row3" lineStyle="0" metaname="tSortRow_1" offsetLabelX="0" offsetLabelY="0" source="tSortRow_1" target="tReplicate_1">
+    <elementParameter xmi:id="_PXP-0F0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="row3" show="false"/>
+  </connection>
+  <connection xmi:id="_PXP-0V0JEee7fslAx7QF5A" connectorName="FLOW" label="row4" lineStyle="0" metaname="tReplicate_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tReplicate_1" target="tFileOutputDelimited_1">
+    <elementParameter xmi:id="_PXP-0l0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="row4" show="false"/>
+  </connection>
+  <connection xmi:id="_PXP-010JEee7fslAx7QF5A" connectorName="FLOW" label="row5" lineStyle="0" metaname="tReplicate_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tReplicate_1" target="tFileOutputParquet_1">
+    <elementParameter xmi:id="_PXP-1F0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="row5" show="false"/>
+  </connection>
+  <subjob xmi:id="_PXP-1V0JEee7fslAx7QF5A">
+    <elementParameter xmi:id="_PXP-1l0JEee7fslAx7QF5A" field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1" show="false"/>
+    <elementParameter xmi:id="_PXP-110JEee7fslAx7QF5A" field="COLOR" name="SUBJOB_TITLE_COLOR" value="92;131;150" show="false"/>
+    <elementParameter xmi:id="_PXP-2F0JEee7fslAx7QF5A" field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
+  </subjob>
+</talendfile:ProcessType>
