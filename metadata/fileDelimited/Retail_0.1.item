@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.record="http:///orgomg/cwm/resource/record.ecore">
+  <TalendMetadata:DelimitedFileConnection xmi:id="_Hek0gGffEeeJ_IWhpqAngg" name="Retail" dataPackage="_Hek0gWffEeeJ_IWhpqAngg" Server="Localhost 127.0.0.1" FilePath="C:/Users/adity/Desktop/Talend/SCD Dataset/Retailer.txt" Encoding="US-ASCII" FieldSeparatorValue="&quot;\t&quot;" RowSeparatorValue="&quot;\n&quot;" UseHeader="true" HeaderValue="1" FirstLineCaption="true" FieldSeparatorType="Tabulation"/>
+  <orgomg.cwm.resource.record:RecordFile xmi:id="_Hek0gWffEeeJ_IWhpqAngg" name="default" dataManager="_Hek0gGffEeeJ_IWhpqAngg">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_Hek0gmffEeeJ_IWhpqAngg" id="_A_FBgGffEeeJ_IWhpqAngg" label="Retail_Dataset">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_Hek0g2ffEeeJ_IWhpqAngg" label="RetailerID" length="10" talendType="id_Integer" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_Hek0hGffEeeJ_IWhpqAngg" label="RetailerName" length="20" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_Hek0hWffEeeJ_IWhpqAngg" label="RetailerState" length="30" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_Hek0hmffEeeJ_IWhpqAngg" label="RetailerCountry" length="20" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+    </ownedElement>
+  </orgomg.cwm.resource.record:RecordFile>
+</xmi:XMI>

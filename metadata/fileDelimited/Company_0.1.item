@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.record="http:///orgomg/cwm/resource/record.ecore">
+  <TalendMetadata:DelimitedFileConnection xmi:id="_QQIwwGffEeeJ_IWhpqAngg" name="Company" dataPackage="_QQIwwWffEeeJ_IWhpqAngg" Server="Localhost 127.0.0.1" FilePath="C:/Users/adity/Desktop/Talend/SCD Dataset/Company.txt" Encoding="US-ASCII" FieldSeparatorValue="&quot;\t&quot;" RowSeparatorValue="&quot;\n&quot;" UseHeader="true" HeaderValue="1" FirstLineCaption="true" FieldSeparatorType="Tabulation"/>
+  <orgomg.cwm.resource.record:RecordFile xmi:id="_QQIwwWffEeeJ_IWhpqAngg" name="default" dataManager="_QQIwwGffEeeJ_IWhpqAngg">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_QQIwwmffEeeJ_IWhpqAngg" id="_ICpK4GffEeeJ_IWhpqAngg" label="Company_Dataset">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_QQIww2ffEeeJ_IWhpqAngg" label="CompanyID" length="10" talendType="id_Integer" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_QQIwxGffEeeJ_IWhpqAngg" label="CompanyName" length="20" talendType="id_String" pattern="&quot;dd-MM-yyyy&quot;"/>
+    </ownedElement>
+  </orgomg.cwm.resource.record:RecordFile>
+</xmi:XMI>

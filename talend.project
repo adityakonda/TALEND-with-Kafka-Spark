@@ -255,25 +255,6 @@
       <relatedItems xmi:id="_SCD98V0JEee7fslAx7QF5A" id="MDM" version="Latest" type="routine"/>
       <relatedItems xmi:id="_SCD98l0JEee7fslAx7QF5A" id="_Mb23YVtpEee6Z9U3i4T8WA - customer" version="Latest" type="schema"/>
     </ItemsRelations>
-    <ItemsRelations xmi:id="_SE9g4F0JEee7fslAx7QF5A">
-      <baseItem xmi:id="_SE9g4V0JEee7fslAx7QF5A" id="_SEF-MF0JEee7fslAx7QF5A" version="0.1" type="job"/>
-      <relatedItems xmi:id="_SE9g410JEee7fslAx7QF5A" id="SQLike" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g5F0JEee7fslAx7QF5A" id="Numeric" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g5V0JEee7fslAx7QF5A" id="TalendString" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g5l0JEee7fslAx7QF5A" id="DataMasking" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g510JEee7fslAx7QF5A" id="DataOperation" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g6F0JEee7fslAx7QF5A" id="DqStringHandling" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g6V0JEee7fslAx7QF5A" id="StringHandling" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g6l0JEee7fslAx7QF5A" id="TalendDataGenerator" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g610JEee7fslAx7QF5A" id="TalendDate" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g7F0JEee7fslAx7QF5A" id="DataQuality" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g7V0JEee7fslAx7QF5A" id="Mathematical" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g7l0JEee7fslAx7QF5A" id="Relational" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g710JEee7fslAx7QF5A" id="DQTechnical" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g8F0JEee7fslAx7QF5A" id="DataQualityDependencies" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g8V0JEee7fslAx7QF5A" id="MDM" version="Latest" type="routine"/>
-      <relatedItems xmi:id="_SE9g8l0JEee7fslAx7QF5A" id="_Mb23YVtpEee6Z9U3i4T8WA - customer" version="Latest" type="schema"/>
-    </ItemsRelations>
     <ItemsRelations xmi:id="_54ckEGGeEeeCq-PWG04Yfw">
       <baseItem xmi:id="_54ckEWGeEeeCq-PWG04Yfw" id="_pQ-GYGGcEeeCq-PWG04Yfw" version="0.1" type="job"/>
       <relatedItems xmi:id="_54ckEmGeEeeCq-PWG04Yfw" id="_-lzPAFdhEeeIzdhs3zGnHA" version="Latest" type="property"/>
@@ -330,6 +311,34 @@
       <relatedItems xmi:id="_q0Z6L2G_EeeCq-PWG04Yfw" id="DQTechnical" version="Latest" type="routine"/>
       <relatedItems xmi:id="_q0Z6MGG_EeeCq-PWG04Yfw" id="DataQualityDependencies" version="Latest" type="routine"/>
       <relatedItems xmi:id="_q0Z6MWG_EeeCq-PWG04Yfw" id="MDM" version="Latest" type="routine"/>
+    </ItemsRelations>
+    <ItemsRelations xmi:id="_1eu8QGgJEeeJ_IWhpqAngg">
+      <baseItem xmi:id="_1eu8QWgJEeeJ_IWhpqAngg" id="_ZQFuUGffEeeJ_IWhpqAngg" version="0.1" type="job"/>
+      <relatedItems xmi:id="_1eu8QmgJEeeJ_IWhpqAngg" id="SQLike" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8Q2gJEeeJ_IWhpqAngg" id="Numeric" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8RGgJEeeJ_IWhpqAngg" id="TalendString" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8RWgJEeeJ_IWhpqAngg" id="DataMasking" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8RmgJEeeJ_IWhpqAngg" id="DataOperation" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8R2gJEeeJ_IWhpqAngg" id="DqStringHandling" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8SGgJEeeJ_IWhpqAngg" id="StringHandling" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8SWgJEeeJ_IWhpqAngg" id="TalendDataGenerator" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8SmgJEeeJ_IWhpqAngg" id="TalendDate" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8S2gJEeeJ_IWhpqAngg" id="DataQuality" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8TGgJEeeJ_IWhpqAngg" id="Mathematical" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8TWgJEeeJ_IWhpqAngg" id="Relational" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8TmgJEeeJ_IWhpqAngg" id="DQTechnical" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8T2gJEeeJ_IWhpqAngg" id="DataQualityDependencies" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_1eu8UGgJEeeJ_IWhpqAngg" id="MDM" version="Latest" type="routine"/>
+      <relatedItems xmi:id="_gV5vEGgOEeeJ_IWhpqAngg" id="_QQIJsGffEeeJ_IWhpqAngg" version="Latest" type="property"/>
+      <relatedItems xmi:id="_gV5vEWgOEeeJ_IWhpqAngg" id="_QQIJsGffEeeJ_IWhpqAngg - Company_Dataset" version="Latest" type="schema"/>
+      <relatedItems xmi:id="_XhLNQWgSEeeJ_IWhpqAngg" id="_-YwN4GZ9EeeJ_IWhpqAngg - company" version="Latest" type="schema"/>
+      <relatedItems xmi:id="_fXSjAGgUEeeJ_IWhpqAngg" id="_-YwN4GZ9EeeJ_IWhpqAngg" version="Latest" type="property"/>
+      <relatedItems xmi:id="_fXSjAWgUEeeJ_IWhpqAngg" id="_HekNcGffEeeJ_IWhpqAngg" version="Latest" type="property"/>
+      <relatedItems xmi:id="_fXSjAmgUEeeJ_IWhpqAngg" id="_HekNcGffEeeJ_IWhpqAngg - Retail_Dataset" version="Latest" type="schema"/>
+      <relatedItems xmi:id="_fXSjA2gUEeeJ_IWhpqAngg" id="_-YwN4GZ9EeeJ_IWhpqAngg - retail" version="Latest" type="schema"/>
+      <relatedItems xmi:id="_R8TIEGgVEeeJ_IWhpqAngg" id="__95RUGfeEeeJ_IWhpqAngg" version="Latest" type="property"/>
+      <relatedItems xmi:id="_R8TIEWgVEeeJ_IWhpqAngg" id="_-YwN4GZ9EeeJ_IWhpqAngg - product" version="Latest" type="schema"/>
+      <relatedItems xmi:id="_R8TIEmgVEeeJ_IWhpqAngg" id="__95RUGfeEeeJ_IWhpqAngg - Product_Dataset" version="Latest" type="schema"/>
     </ItemsRelations>
     <migrationTask xmi:id="_m5y0EFdeEeeIzdhs3zGnHA" id="org.talend.designer.core.ui.preferences.migration.ChangeMysqlVersionForProjectSetting" breaks="5.2.0" version="5.1.3" status="ok"/>
     <migrationTask xmi:id="_m5y0EVdeEeeIzdhs3zGnHA" id="org.talend.designer.core.ui.preferences.migration.ChangeOracleVersionForProjectSetting" breaks="5.2.0" version="5.2.1" status="ok"/>
