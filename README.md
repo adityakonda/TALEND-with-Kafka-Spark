@@ -25,3 +25,50 @@
 ```
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
+```json
+[
+  {
+    "operation": "shift",
+    "spec": {
+      "authrzd": {
+        "*": {
+          "*": "&",
+          "enty_func": {
+            "*": {
+              "@": "&2.@(3,authrzd_mbr_id).@(1,enty_func_id)"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "enty_func": {
+        "*": {
+          "*": "=lastElement(@(1,&))"
+        }
+      }
+    }
+},
+  {
+    "operation": "shift",
+    "spec": {
+      "enty_func": {
+        "*": {
+          "$": "&.authrzd_mbr_id",
+          "*": "&1.&2[]"
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": "authrzd"
+    }
+  }
+]
+
+```
