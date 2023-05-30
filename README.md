@@ -75,35 +75,39 @@
 
 ```
 
-import java.nio.file.{Files, Path, Paths}
+import java.io.File
 
 object FolderDeletion {
   def main(args: Array[String]): Unit = {
     val folderPath = "path/to/folder" // Replace with the actual folder path
-    
     val folderName = "folderName" // Replace with the name of the folder to delete
     
-    val directory = Paths.get(folderPath)
+    val directory = new File(folderPath)
     
-    if (Files.exists(directory) && Files.isDirectory(directory)) {
-      val subDirectories = Files.newDirectoryStream(directory)
-      val matchingDirectories = subDirectories.filter(p => p.getFileName.toString == folderName)
+    if (directory.exists && directory.isDirectory) {
+      val matchingDirectories = directory.listFiles.filter(_.isDirectory).filter(_.getName == folderName)
       
-      matchingDirectories.forEach(deleteDirectory)
+      matchingDirectories.foreach(deleteDirectory)
     } else {
       println("Invalid folder path.")
     }
   }
   
-  def deleteDirectory(directory: Path): Unit = {
-    if (Files.isDirectory(directory)) {
-      val subDirectories = Files.newDirectoryStream(directory)
-      subDirectories.forEach(deleteDirectory)
+  def deleteDirectory(directory: File): Unit = {
+    val files = directory.listFiles
+    if (files != null) {
+      files.foreach {
+        file =>
+          if (file.isDirectory)
+            deleteDirectory(file)
+          else
+            file.delete()
+      }
     }
-    
-    Files.deleteIfExists(directory)
-    println(s"Deleted: ${directory.toString}")
+    directory.delete()
+    println(s"Deleted: ${directory.getAbsolutePath}")
   }
 }
+
 
 ```
