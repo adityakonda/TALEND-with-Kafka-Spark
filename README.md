@@ -74,7 +74,6 @@
 ```
 
 ```
-
 import java.io.File
 
 object FolderDeletion {
@@ -93,17 +92,16 @@ object FolderDeletion {
   def deleteFilesInSubdirectories(directory: File): Unit = {
     val files = directory.listFiles
     if (files != null) {
-      files.foreach {
-        file =>
-          if (file.isDirectory) {
-            if (file.getName == directory.getName) {
-              deleteFilesInSubdirectories(file)
-            } else {
-              deleteDirectory(file)
-            }
+      files.foreach { file =>
+        if (file.isDirectory) {
+          if (file.getName + ".csv" == directory.getName + ".csv") {
+            deleteFilesInSubdirectories(file)
           } else {
-            file.delete()
+            deleteDirectory(file)
           }
+        } else {
+          file.delete()
+        }
       }
     }
   }
@@ -111,18 +109,17 @@ object FolderDeletion {
   def deleteDirectory(directory: File): Unit = {
     val files = directory.listFiles
     if (files != null) {
-      files.foreach {
-        file =>
-          if (file.isDirectory)
-            deleteDirectory(file)
-          else
-            file.delete()
+      files.foreach { file =>
+        if (file.isDirectory) {
+          deleteDirectory(file)
+        } else {
+          file.delete()
+        }
       }
     }
     directory.delete()
     println(s"Deleted directory: ${directory.getAbsolutePath}")
   }
 }
-
 
 ```
