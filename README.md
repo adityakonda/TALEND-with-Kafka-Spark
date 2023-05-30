@@ -80,16 +80,31 @@ import java.io.File
 object FolderDeletion {
   def main(args: Array[String]): Unit = {
     val folderPath = "path/to/folder" // Replace with the actual folder path
-    val folderName = "folderName" // Replace with the name of the folder to delete
     
     val directory = new File(folderPath)
     
     if (directory.exists && directory.isDirectory) {
-      val matchingDirectories = directory.listFiles.filter(_.isDirectory).filter(_.getName == folderName)
-      
-      matchingDirectories.foreach(deleteDirectory)
+      deleteFilesInSubdirectories(directory)
     } else {
       println("Invalid folder path.")
+    }
+  }
+  
+  def deleteFilesInSubdirectories(directory: File): Unit = {
+    val files = directory.listFiles
+    if (files != null) {
+      files.foreach {
+        file =>
+          if (file.isDirectory) {
+            if (file.getName == directory.getName) {
+              deleteFilesInSubdirectories(file)
+            } else {
+              deleteDirectory(file)
+            }
+          } else {
+            file.delete()
+          }
+      }
     }
   }
   
@@ -105,7 +120,7 @@ object FolderDeletion {
       }
     }
     directory.delete()
-    println(s"Deleted: ${directory.getAbsolutePath}")
+    println(s"Deleted directory: ${directory.getAbsolutePath}")
   }
 }
 
