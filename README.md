@@ -123,3 +123,6 @@ object FolderDeletion {
 }
 
 ```
+
+SELECT REGEXP_EXTRACT("$695.6 M", r'([0-9]+(\.[0-9]+)?)') AS result
+
