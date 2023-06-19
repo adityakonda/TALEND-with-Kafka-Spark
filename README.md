@@ -74,55 +74,29 @@
 ```
 
 ```
-import java.io.File
+import org.apache.spark.sql.SparkSession
 
-object FolderDeletion {
-  def main(args: Array[String]): Unit = {
-    val folderPath = "path/to/folder" // Replace with the actual folder path
-    
-    val directory = new File(folderPath)
-    
-    if (directory.exists && directory.isDirectory) {
-      deleteFilesInSubdirectories(directory)
-    } else {
-      println("Invalid folder path.")
-    }
-  }
-  
-  def deleteFilesInSubdirectories(directory: File): Unit = {
-    val files = directory.listFiles
-    if (files != null) {
-      files.foreach { file =>
-        if (file.isDirectory) {
-          if (file.getName + ".csv" == directory.getName + ".csv") {
-            deleteFilesInSubdirectories(file)
-          } else {
-            deleteDirectory(file)
-          }
-        } else {
-          file.delete()
-        }
-      }
-    }
-  }
-  
-  def deleteDirectory(directory: File): Unit = {
-    val files = directory.listFiles
-    if (files != null) {
-      files.foreach { file =>
-        if (file.isDirectory) {
-          deleteDirectory(file)
-        } else {
-          file.delete()
-        }
-      }
-    }
-    directory.delete()
-    println(s"Deleted directory: ${directory.getAbsolutePath}")
+// Create a SparkSession
+val spark = SparkSession.builder
+  .appName("Spark SQL Script Execution")
+  .getOrCreate()
+
+// Read the SQL script file
+val scriptPath = "/path/to/your/script.sql"
+val scriptContent = spark.read.textFile(scriptPath).collect()
+
+// Execute each SQL statement, ignoring comment lines
+scriptContent.foreach { query =>
+  val trimmedQuery = query.trim
+  if (!trimmedQuery.startsWith("--") && trimmedQuery.nonEmpty) {
+    spark.sql(trimmedQuery).show()
   }
 }
 
+// Stop the SparkSession
+spark.stop()
+
+
 ```
 
-SELECT REGEXP_EXTRACT("$695.6 M", r'([0-9]+(\.[0-9]+)?)') AS result
 
