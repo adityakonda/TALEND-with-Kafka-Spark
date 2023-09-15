@@ -74,31 +74,40 @@
 ```
 
 ```
-import xml.etree.ElementTree as ET
+import sys
+import xml.dom.minidom as minidom
 
-# Replace 'input.xml' with the path to your input XML file
-input_file = 'input.xml'
+def format_xml(input_file):
+    try:
+        with open(input_file, "r") as file:
+            xml_content = file.read()
+    except FileNotFoundError:
+        print(f"Error: The file '{input_file}' was not found.")
+        sys.exit(1)
 
-# Replace 'output.xml' with the desired output file name
-output_file = 'formatted_output.xml'
+    try:
+        dom = minidom.parseString(xml_content)
+        pretty_xml = dom.toprettyxml(indent="  ")
+    except Exception as e:
+        print(f"Error parsing or formatting XML: {str(e)}")
+        sys.exit(1)
 
-try:
-    # Parse the XML File
-    tree = ET.parse(input_file)
-    root = tree.getroot()
+    try:
+        with open(input_file, "w") as file:
+            file.write(pretty_xml)
+        print(f"XML in '{input_file}' has been formatted and overwritten.")
+    except Exception as e:
+        print(f"Error writing formatted XML: {str(e)}")
+        sys.exit(1)
 
-    # Create a new XML string with pretty formatting
-    xml_string = ET.tostring(root, encoding='utf-8', method='xml').decode()
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python format_xml.py <xml_file>")
+        sys.exit(1)
 
-    # Write the Reformatted XML to the Output File
-    with open(output_file, 'w') as file:
-        file.write(xml_string)
+    xml_file_path = sys.argv[1]
+    format_xml(xml_file_path)
 
-    print(f'XML formatting completed. Formatted XML saved to {output_file}')
-except FileNotFoundError:
-    print(f'Error: The input XML file "{input_file}" was not found.')
-except Exception as e:
-    print(f'An error occurred: {str(e)}')
 
 
 
