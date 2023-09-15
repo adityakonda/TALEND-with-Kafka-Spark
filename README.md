@@ -74,27 +74,32 @@
 ```
 
 ```
-import org.apache.spark.sql.SparkSession
+import xml.etree.ElementTree as ET
 
-// Create a SparkSession
-val spark = SparkSession.builder
-  .appName("Spark SQL Script Execution")
-  .getOrCreate()
+# Replace 'input.xml' with the path to your input XML file
+input_file = 'input.xml'
 
-// Read the SQL script file
-val scriptPath = "/path/to/your/script.sql"
-val scriptContent = spark.read.textFile(scriptPath).collect()
+# Replace 'output.xml' with the desired output file name
+output_file = 'formatted_output.xml'
 
-// Execute each SQL statement, ignoring comment lines
-scriptContent.foreach { query =>
-  val trimmedQuery = query.trim
-  if (!trimmedQuery.startsWith("--") && trimmedQuery.nonEmpty) {
-    spark.sql(trimmedQuery).show()
-  }
-}
+try:
+    # Parse the XML File
+    tree = ET.parse(input_file)
+    root = tree.getroot()
 
-// Stop the SparkSession
-spark.stop()
+    # Create a new XML string with pretty formatting
+    xml_string = ET.tostring(root, encoding='utf-8', method='xml').decode()
+
+    # Write the Reformatted XML to the Output File
+    with open(output_file, 'w') as file:
+        file.write(xml_string)
+
+    print(f'XML formatting completed. Formatted XML saved to {output_file}')
+except FileNotFoundError:
+    print(f'Error: The input XML file "{input_file}" was not found.')
+except Exception as e:
+    print(f'An error occurred: {str(e)}')
+
 
 
 ```
