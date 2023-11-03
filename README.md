@@ -114,6 +114,10 @@ with open(file_path, 'w', encoding='utf-8') as file:
     file.writelines(filtered_lines)
 
 
+=IF(ISNUMBER(MATCH(A2&B2, 'Sheet B'!A:A&'Sheet B'!B:B, 0)), "Found", "Not Found")
+
+
+
 ```
 
 
