@@ -74,33 +74,22 @@
 ```
 
 ```
-# Define input and output file paths for both files
-input_file1_path = 'file1.txt'
-input_file2_path = 'file2.txt'
-output_file1_path = 'file1_output.txt'
-output_file2_path = 'file2_output.txt'
+# Define the file path (replace with your file path)
+file_path = r'C:\path\to\your\file.txt'
 
-# Phrases to exclude
-excluded_phrases = ["records selected", "----", "subname"]
+# Define the list of words to remove lines containing them
+words_to_remove = ["replace", "selected", "1111"]
 
-# Function to process a file and write the result to another file
-def process_file(input_path, output_path):
-    with open(input_path, 'r') as input_file, open(output_path, 'w') as output_file:
-        for line in input_file:
-            # Check if the line is not empty and does not contain any excluded phrases
-            if line.strip() and not any(phrase in line for phrase in excluded_phrases):
-                # If not, write the line to the output file
-                output_file.write(line)
+# Read the file and process its lines
+with open(file_path, 'r', encoding='utf-8') as file:
+    lines = file.readlines()
 
-# Process the first file
-process_file(input_file1_path, output_file1_path)
+# Remove empty lines and lines containing words_to_remove
+filtered_lines = [line for line in lines if line.strip() and not any(word in line for word in words_to_remove)]
 
-# Process the second file
-process_file(input_file2_path, output_file2_path)
-
-
-
-
+# Write the filtered lines back to the file
+with open(file_path, 'w', encoding='utf-8') as file:
+    file.writelines(filtered_lines)
 
 ```
 
