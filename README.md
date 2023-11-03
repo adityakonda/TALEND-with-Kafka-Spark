@@ -91,6 +91,29 @@ filtered_lines = [line for line in lines if line.strip() and not any(word in lin
 with open(file_path, 'w', encoding='utf-8') as file:
     file.writelines(filtered_lines)
 
+
+----
+
+
+# Define the file path (replace with your file path)
+file_path = r'C:\path\to\your\file.txt'
+
+# Define the list of words to remove lines containing them
+words_to_remove = ["replace", "selected", "1111"]
+
+# Read the file and process its lines
+with open(file_path, 'r', encoding='utf-8') as file:
+    lines = file.readlines()
+
+# Remove empty lines, lines containing words_to_remove, and substrings like "_dev" and "_prod"
+filtered_lines = [line for line in lines if line.strip() and not any(word in line for word in words_to_remove)]
+filtered_lines = [line.replace("_dev", "").replace("_prod", "") for line in filtered_lines]
+
+# Write the filtered lines back to the file
+with open(file_path, 'w', encoding='utf-8') as file:
+    file.writelines(filtered_lines)
+
+
 ```
 
 
