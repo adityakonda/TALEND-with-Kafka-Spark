@@ -74,39 +74,30 @@
 ```
 
 ```
-import sys
-import xml.dom.minidom as minidom
+# Define input and output file paths for both files
+input_file1_path = 'file1.txt'
+input_file2_path = 'file2.txt'
+output_file1_path = 'file1_output.txt'
+output_file2_path = 'file2_output.txt'
 
-def format_xml(input_file):
-    try:
-        with open(input_file, "r") as file:
-            xml_content = file.read()
-    except FileNotFoundError:
-        print(f"Error: The file '{input_file}' was not found.")
-        sys.exit(1)
+# Phrases to exclude
+excluded_phrases = ["records selected", "----", "subname"]
 
-    try:
-        dom = minidom.parseString(xml_content)
-        pretty_xml = dom.toprettyxml(indent="  ")
-    except Exception as e:
-        print(f"Error parsing or formatting XML: {str(e)}")
-        sys.exit(1)
+# Function to process a file and write the result to another file
+def process_file(input_path, output_path):
+    with open(input_path, 'r') as input_file, open(output_path, 'w') as output_file:
+        for line in input_file:
+            # Check if the line is not empty and does not contain any excluded phrases
+            if line.strip() and not any(phrase in line for phrase in excluded_phrases):
+                # If not, write the line to the output file
+                output_file.write(line)
 
-    try:
-        with open(input_file, "w") as file:
-            file.write(pretty_xml)
-        print(f"XML in '{input_file}' has been formatted and overwritten.")
-    except Exception as e:
-        print(f"Error writing formatted XML: {str(e)}")
-        sys.exit(1)
+# Process the first file
+process_file(input_file1_path, output_file1_path)
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python format_xml.py <xml_file>")
-        sys.exit(1)
+# Process the second file
+process_file(input_file2_path, output_file2_path)
 
-    xml_file_path = sys.argv[1]
-    format_xml(xml_file_path)
 
 
 
