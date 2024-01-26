@@ -120,4 +120,14 @@ with open(file_path, 'w', encoding='utf-8') as file:
 
 ```
 
+Debugging the on-premises NiFi issue related to writing to S3
+Exhaustively tested all suggested approaches by Cloudera team without success
+Attempted using "https://" prefix for the bucket name
+Explored the recommendation to avoid SSL context services
+Referencing page 4 of the attached PDF document for their suggested configurations
+Request for Cloudera engineers to join the call for assistance
+Resolving the issue promptly
+Successful data transfer from on-premises NiFi cluster to S3 via CLI
+Challenges encountered with the putNiFi processor for data writing
+
 
