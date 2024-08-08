@@ -37,16 +37,17 @@ def generate_json(n):
     for _ in range(n):
         rand_id = random.randint(1, 50)
         rand_dept = random.choice(departments)
-        entry = {"id": str(rand_id), "dept": [rand_dept]}
+        entry = {"id": str(rand_id), "dept": rand_dept}
         data.append(entry)
 
     with open('output.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
 if __name__ == "__main__":
-    n = int(input("Enter the number of IDs to generate: "))
+    n = int(input("Enter the number of documents to generate: "))
     generate_json(n)
     print(f"JSON file with {n} entries has been generated as 'output.json'")
+
 
 
 ```
