@@ -29,9 +29,11 @@
 
 import json
 import random
+from collections import Counter
 
 def generate_json(n):
     data = []
+    id_counts = Counter()
     departments = ["dept1", "dept2", "dept3"]
 
     for _ in range(n):
@@ -39,14 +41,21 @@ def generate_json(n):
         rand_dept = random.choice(departments)
         entry = {"id": str(rand_id), "dept": rand_dept}
         data.append(entry)
+        id_counts[rand_id] += 1
 
+    # Write the main JSON file
     with open('output.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
+
+    # Write the ID counts to a separate file
+    with open('id_counts.json', 'w') as count_file:
+        json.dump(id_counts, count_file, indent=4)
 
 if __name__ == "__main__":
     n = int(input("Enter the number of documents to generate: "))
     generate_json(n)
     print(f"JSON file with {n} entries has been generated as 'output.json'")
+    print("ID counts have been written to 'id_counts.json'")
 
 
 
