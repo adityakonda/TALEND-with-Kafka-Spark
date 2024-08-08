@@ -28,10 +28,11 @@
 ```
 
 import json
+import csv
 import random
 from collections import Counter
 
-def generate_json(n):
+def generate_files(n):
     data = []
     id_counts = Counter()
     departments = ["dept1", "dept2", "dept3"]
@@ -47,15 +48,19 @@ def generate_json(n):
     with open('output.json', 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
-    # Write the ID counts to a separate file
-    with open('id_counts.json', 'w') as count_file:
-        json.dump(id_counts, count_file, indent=4)
+    # Write the ID counts to a separate CSV file
+    with open('id_counts.csv', 'w', newline='') as count_file:
+        writer = csv.writer(count_file)
+        writer.writerow(["id", "count"])
+        for id, count in id_counts.items():
+            writer.writerow([id, count])
 
 if __name__ == "__main__":
     n = int(input("Enter the number of documents to generate: "))
-    generate_json(n)
+    generate_files(n)
     print(f"JSON file with {n} entries has been generated as 'output.json'")
-    print("ID counts have been written to 'id_counts.json'")
+    print("ID counts have been written to 'id_counts.csv'")
+
 
 
 
