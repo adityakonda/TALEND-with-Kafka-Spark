@@ -25,21 +25,19 @@
 ```
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
-```json
+```
+
 import json
 import random
 
 def generate_json(n):
     data = []
-    used_ids = set()
+    departments = ["dept1", "dept2", "dept3"]
 
     for _ in range(n):
-        while True:
-            rand_id = random.randint(1, 50)
-            if rand_id not in used_ids:
-                used_ids.add(rand_id)
-                break
-        entry = {"id": str(rand_id), "dept": "emp"}
+        rand_id = random.randint(1, 50)
+        rand_dept = random.choice(departments)
+        entry = {"id": str(rand_id), "dept": [rand_dept]}
         data.append(entry)
 
     with open('output.json', 'w') as json_file:
@@ -47,11 +45,8 @@ def generate_json(n):
 
 if __name__ == "__main__":
     n = int(input("Enter the number of IDs to generate: "))
-    if n > 50:
-        print("Number of IDs cannot exceed 50.")
-    else:
-        generate_json(n)
-        print(f"JSON file with {n} entries has been generated as 'output.json'")
+    generate_json(n)
+    print(f"JSON file with {n} entries has been generated as 'output.json'")
 
 
 ```
