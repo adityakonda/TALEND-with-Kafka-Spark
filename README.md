@@ -73,6 +73,11 @@ def generate_n_json_objects(n, id):
         if highest_ts is None or current_ts > highest_ts:
             highest_ts = current_ts
     
+    # Save JSON to a file
+    json_file = 'output.json'
+    with open(json_file, 'w') as jf:
+        json.dump(json_objects, jf, indent=2)
+    
     # Save to CSV
     csv_file = 'output.csv'
     with open(csv_file, mode='w', newline='') as file:
@@ -80,8 +85,10 @@ def generate_n_json_objects(n, id):
         writer.writeheader()
         writer.writerows(json_objects)
     
-    # Print the highest timestamp
-    print("Highest TS:", highest_ts.strftime('%Y-%m-%dT%H:%M:%SZ'))
+    # Save the highest timestamp to a file
+    ts_file = 'highest_ts.txt'
+    with open(ts_file, 'w') as tf:
+        tf.write(f"Highest TS: {highest_ts.strftime('%Y-%m-%dT%H:%M:%SZ')}")
     
     return json_objects
 
@@ -92,8 +99,14 @@ id_value = 101
 # Generate the JSON objects
 json_objects = generate_n_json_objects(n, id_value)
 
-# Output the JSON objects
+# Output the JSON objects (for display purposes)
 print(json.dumps(json_objects, indent=2))
+
+# Notify the user that files have been created
+print(f"Generated JSON objects have been saved to 'output.json'.")
+print(f"CSV file has been saved to 'output.csv'.")
+print(f"The highest timestamp has been saved to 'highest_ts.txt'.")
+
 
 
 
