@@ -26,7 +26,6 @@
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
 ```
-
 import random
 import datetime
 import json
@@ -56,10 +55,10 @@ def generate_random_json_object(id):
         "TS": TS,
         "LST_NM": LST_NM.upper(),
         "FST_NM": FST_NM.upper(),
-        "id": str(id)
+        "id": id  # Ensure ID is a string
     }
 
-# Main function to generate 'n' JSON objects and save to CSV
+# Main function to generate 'n' JSON objects and save to JSON and CSV files
 def generate_n_json_objects(n, id):
     json_objects = []
     highest_ts = None
@@ -94,7 +93,7 @@ def generate_n_json_objects(n, id):
 
 # Get the number of JSON objects to generate from the user
 n = int(input("Enter the number of JSON objects to generate: "))
-id_value = 101
+id_value = "101"  # ID as a string
 
 # Generate the JSON objects
 json_objects = generate_n_json_objects(n, id_value)
@@ -106,10 +105,6 @@ print(json.dumps(json_objects, indent=2))
 print(f"Generated JSON objects have been saved to 'output.json'.")
 print(f"CSV file has been saved to 'output.csv'.")
 print(f"The highest timestamp has been saved to 'highest_ts.txt'.")
-
-
-
-
 
 
 ```
