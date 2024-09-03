@@ -110,4 +110,13 @@ print(f"The highest timestamp has been saved to 'highest_ts.txt'.")
 ```
 
 
+The Wait and Notify processors are not behaving as expected. Occasionally, the Wait processor releases more flow files than intended, even though it has only been notified once.
+
+Section 1: The GenerateFlowFile processor creates a document containing a 500-element JSON array. This document is then split into individual flow files, each representing a single JSON object from the array. After splitting, specific attributes are added to each flow file. Notably, all 500 JSON objects share the same id.
+
+Section 2: The CryptographicHashAttribute processor is used in conjunction with the DetectDuplicate processor to identify duplicates based on the hashed id field. This process works as expected, with duplicates being routed to the Wait processor and non-duplicates being sent to the Notify processor.
+
+However, there are inconsistencies observed during the process. Sometimes, when only one message is notified, the Wait processor releases two or more flow files. After processing all 500 files, when releasing files from the GenerateFlowFile processor and stopping the Notify processor, it was observed that instead of releasing one flow file, the Wait processor sometimes releases 25 or even more than 30 flow files. We need assistance in understanding why these inconsistencies are occurring.
+
+
 
