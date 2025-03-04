@@ -28,6 +28,7 @@
 ```
 import re
 import collections
+import os
 
 def extract_info_queries_by_collection(log_file):
     """Extracts collections and query patterns only from INFO log entries."""
@@ -38,15 +39,20 @@ def extract_info_queries_by_collection(log_file):
     collection_regex = re.compile(r"\[c:\s*([^]\s]+)]")  # Extract collection name
     query_regex = re.compile(r"q=([^&\s]+)")  # Extract query string
 
-    with open(log_file, 'r', encoding='utf-8') as file:
+    # Check if file exists
+    if not os.path.exists(log_file):
+        print(f"Error: File '{log_file}' not found.")
+        return None
+
+    with open(log_file, 'r', encoding='utf-8-sig') as file:  # utf-8-sig to handle encoding issues
         for line in file:
             if info_log_regex.search(line):  # Process only INFO logs
                 collection_match = collection_regex.search(line)
                 query_match = query_regex.search(line)
 
                 if collection_match and query_match:
-                    collection = collection_match.group(1)  # Extract collection name
-                    raw_query = query_match.group(1)  # Extract raw query
+                    collection = collection_match.group(1).strip()  # Extract collection name
+                    raw_query = query_match.group(1).strip()  # Extract raw query
                     
                     # Normalize query pattern (remove values)
                     query_pattern = normalize_query(raw_query)
@@ -67,6 +73,10 @@ def normalize_query(query):
 def main(log_file):
     collection_queries = extract_info_queries_by_collection(log_file)
 
+    if not collection_queries:
+        print("\nNo INFO log entries with queries found in the file.")
+        return
+
     # Display results
     print("\nQuery Patterns Count Per Collection (INFO Logs Only):\n")
     for collection, query_patterns in collection_queries.items():
@@ -77,6 +87,7 @@ def main(log_file):
 if __name__ == "__main__":
     log_file_path = r"C:\Users\adity\Downloads\test.log"  # Update with your actual file path
     main(log_file_path)
+
 
 
 ```
