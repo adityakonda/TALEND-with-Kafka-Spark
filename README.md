@@ -26,6 +26,7 @@
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
 ```
+
 import re
 import collections
 import os
@@ -34,19 +35,19 @@ def extract_info_queries_by_collection(log_file):
     """Extracts collections and query patterns only from INFO log entries."""
     collection_queries = collections.defaultdict(collections.Counter)
 
-    # Regex patterns
-    info_log_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\s+INFO")  # Filter only INFO logs
+    # Updated regex patterns
+    info_log_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\s+INFO\b")  # Match timestamp + INFO
     collection_regex = re.compile(r"\[c:\s*([^]\s]+)]")  # Extract collection name
-    query_regex = re.compile(r"q=([^&\s]+)")  # Extract query string
+    query_regex = re.compile(r"[?&]q=([^&\s]+)")  # Extract query string
 
     # Check if file exists
     if not os.path.exists(log_file):
         print(f"Error: File '{log_file}' not found.")
         return None
 
-    with open(log_file, 'r', encoding='utf-8-sig') as file:  # utf-8-sig to handle encoding issues
+    with open(log_file, 'r', encoding='utf-8-sig') as file:
         for line in file:
-            if info_log_regex.search(line):  # Process only INFO logs
+            if info_log_regex.search(line):  # Process only INFO logs with timestamps
                 collection_match = collection_regex.search(line)
                 query_match = query_regex.search(line)
 
@@ -87,7 +88,6 @@ def main(log_file):
 if __name__ == "__main__":
     log_file_path = r"C:\Users\adity\Downloads\test.log"  # Update with your actual file path
     main(log_file_path)
-
 
 
 ```
