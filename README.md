@@ -35,7 +35,7 @@ def extract_info_queries_by_collection(log_file):
     collection_queries = collections.defaultdict(collections.Counter)
 
     # Regex patterns
-    info_log_regex = re.compile(r"\bINFO\b")  # Filter only INFO logs
+    info_log_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\s+INFO")  # Filter only INFO logs
     collection_regex = re.compile(r"\[c:\s*([^]\s]+)]")  # Extract collection name
     query_regex = re.compile(r"q=([^&\s]+)")  # Extract query string
 
