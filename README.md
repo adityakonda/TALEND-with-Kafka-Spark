@@ -29,56 +29,53 @@
 import re
 import collections
 
-def extract_log_details(log_file):
-    """Extracts log level, collection name, and query pattern from Solr logs and groups them."""
-    log_data = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(int)))
+def extract_info_queries_by_collection(log_file):
+    """Extracts collections and query patterns only from INFO log entries."""
+    collection_queries = collections.defaultdict(collections.Counter)
 
     # Regex patterns
-    log_level_regex = re.compile(r"\b(INFO|WARN|ERROR)\b")  # Extract log level
+    info_log_regex = re.compile(r"\bINFO\b")  # Filter only INFO logs
     collection_regex = re.compile(r"\[c:\s*([^]\s]+)]")  # Extract collection name
-    query_regex = re.compile(r"q=([^&\s]+)")  # Extract query
+    query_regex = re.compile(r"q=([^&\s]+)")  # Extract query string
 
     with open(log_file, 'r', encoding='utf-8') as file:
         for line in file:
-            log_level_match = log_level_regex.search(line)
-            collection_match = collection_regex.search(line)
-            query_match = query_regex.search(line)
+            if info_log_regex.search(line):  # Process only INFO logs
+                collection_match = collection_regex.search(line)
+                query_match = query_regex.search(line)
 
-            if log_level_match and collection_match and query_match:
-                log_level = log_level_match.group(1)  # Extract log level (INFO, WARN, ERROR)
-                collection = collection_match.group(1)  # Extract collection name
-                raw_query = query_match.group(1)  # Extract query
+                if collection_match and query_match:
+                    collection = collection_match.group(1)  # Extract collection name
+                    raw_query = query_match.group(1)  # Extract raw query
+                    
+                    # Normalize query pattern (remove values)
+                    query_pattern = normalize_query(raw_query)
 
-                # Normalize query pattern
-                query_pattern = normalize_query(raw_query)
+                    # Count the query patterns under each collection
+                    collection_queries[collection][query_pattern] += 1
 
-                # Group under Log Level -> Collection -> Query Pattern
-                log_data[log_level][collection][query_pattern] += 1
-
-    return log_data
+    return collection_queries
 
 def normalize_query(query):
-    """Replaces dynamic values in queries with placeholders for pattern recognition."""
-    query = re.sub(r"\b\d+\b", "<NUM>", query)  # Replace numbers with <NUM>
+    """Replaces dynamic values in queries with placeholders to detect patterns."""
+    query = re.sub(r"\b\d+\b", "<NUM>", query)  # Replace numbers
     query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)  # Boolean values
     query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)  # Replace IDs, GUIDs
-    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:<VAL>", query)  # General field:value placeholders
+    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:<VAL>", query)  # Replace key-value pairs
     return query
 
 def main(log_file):
-    log_data = extract_log_details(log_file)
+    collection_queries = extract_info_queries_by_collection(log_file)
 
-    # Display results grouped by Log Level -> Collection -> Query Pattern
-    print("\nGrouped Log Details:\n")
-    for log_level, collections in log_data.items():
-        print(f"\n### Log Level: {log_level}")
-        for collection, query_patterns in collections.items():
-            print(f"  - Collection: {collection}")
-            for pattern, count in sorted(query_patterns.items(), key=lambda x: x[1], reverse=True):
-                print(f"    - Pattern: {pattern} -> Count: {count}")
+    # Display results
+    print("\nQuery Patterns Count Per Collection (INFO Logs Only):\n")
+    for collection, query_patterns in collection_queries.items():
+        print(f"\nCollection: {collection}")
+        for pattern, count in sorted(query_patterns.items(), key=lambda x: x[1], reverse=True):
+            print(f"  Pattern: {pattern} -> Count: {count}")
 
 if __name__ == "__main__":
-    log_file_path = "solr_logs.txt"  # Replace with your actual log file path
+    log_file_path = r"C:\Users\adity\Downloads\test.log"  # Update with your actual file path
     main(log_file_path)
 
 
