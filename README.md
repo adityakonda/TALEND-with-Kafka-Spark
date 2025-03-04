@@ -26,85 +26,60 @@
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
 ```
-import random
-import datetime
-import json
-import csv
+import re
+import collections
 
-# Function to generate a random timestamp
-def random_timestamp(start_date, end_date):
-    start_timestamp = int(start_date.timestamp())
-    end_timestamp = int(end_date.timestamp())
-    random_timestamp = random.randint(start_timestamp, end_timestamp)
-    return datetime.datetime.utcfromtimestamp(random_timestamp).strftime('%Y-%m-%dT%H:%M:%SZ')
+def extract_log_details(log_file):
+    """Extracts log level, collection name, and query pattern from Solr logs and groups them."""
+    log_data = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(int)))
 
-# Function to generate a random name
-def random_name(name_list):
-    return random.choice(name_list)
+    # Regex patterns
+    log_level_regex = re.compile(r"\b(INFO|WARN|ERROR)\b")  # Extract log level
+    collection_regex = re.compile(r"\[c:\s*([^]\s]+)]")  # Extract collection name
+    query_regex = re.compile(r"q=([^&\s]+)")  # Extract query
 
-# List of example first names and last names
-first_names = ["John", "Jane", "Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Tim"]
-last_names = ["Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Potter"]
+    with open(log_file, 'r', encoding='utf-8') as file:
+        for line in file:
+            log_level_match = log_level_regex.search(line)
+            collection_match = collection_regex.search(line)
+            query_match = query_regex.search(line)
 
-# Function to generate a random JSON object
-def generate_random_json_object(id):
-    TS = random_timestamp(datetime.datetime(2020, 1, 1), datetime.datetime(2024, 12, 31))
-    FST_NM = random_name(first_names)
-    LST_NM = random_name(last_names)
-    return {
-        "TS": TS,
-        "LST_NM": LST_NM.upper(),
-        "FST_NM": FST_NM.upper(),
-        "id": id  # Ensure ID is a string
-    }
+            if log_level_match and collection_match and query_match:
+                log_level = log_level_match.group(1)  # Extract log level (INFO, WARN, ERROR)
+                collection = collection_match.group(1)  # Extract collection name
+                raw_query = query_match.group(1)  # Extract query
 
-# Main function to generate 'n' JSON objects and save to JSON and CSV files
-def generate_n_json_objects(n, id):
-    json_objects = []
-    highest_ts = None
-    
-    for _ in range(n):
-        obj = generate_random_json_object(id)
-        json_objects.append(obj)
-        
-        # Update the highest timestamp
-        current_ts = datetime.datetime.strptime(obj['TS'], '%Y-%m-%dT%H:%M:%SZ')
-        if highest_ts is None or current_ts > highest_ts:
-            highest_ts = current_ts
-    
-    # Save JSON to a file
-    json_file = 'output.json'
-    with open(json_file, 'w') as jf:
-        json.dump(json_objects, jf, indent=2)
-    
-    # Save to CSV
-    csv_file = 'output.csv'
-    with open(csv_file, mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=["TS", "LST_NM", "FST_NM", "id"])
-        writer.writeheader()
-        writer.writerows(json_objects)
-    
-    # Save the highest timestamp to a file
-    ts_file = 'highest_ts.txt'
-    with open(ts_file, 'w') as tf:
-        tf.write(f"Highest TS: {highest_ts.strftime('%Y-%m-%dT%H:%M:%SZ')}")
-    
-    return json_objects
+                # Normalize query pattern
+                query_pattern = normalize_query(raw_query)
 
-# Get the number of JSON objects to generate from the user
-n = int(input("Enter the number of JSON objects to generate: "))
-id_value = "101"  # ID as a string
+                # Group under Log Level -> Collection -> Query Pattern
+                log_data[log_level][collection][query_pattern] += 1
 
-# Generate the JSON objects
-json_objects = generate_n_json_objects(n, id_value)
+    return log_data
 
-# Output the JSON objects (for display purposes)
-print(json.dumps(json_objects, indent=2))
+def normalize_query(query):
+    """Replaces dynamic values in queries with placeholders for pattern recognition."""
+    query = re.sub(r"\b\d+\b", "<NUM>", query)  # Replace numbers with <NUM>
+    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)  # Boolean values
+    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)  # Replace IDs, GUIDs
+    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:<VAL>", query)  # General field:value placeholders
+    return query
 
-# Notify the user that files have been created
-print(f"Generated JSON objects have been saved to 'output.json'.")
-print(f"CSV file has been saved to 'output.csv'.")
-print(f"The highest timestamp has been saved to 'highest_ts.txt'.")
+def main(log_file):
+    log_data = extract_log_details(log_file)
+
+    # Display results grouped by Log Level -> Collection -> Query Pattern
+    print("\nGrouped Log Details:\n")
+    for log_level, collections in log_data.items():
+        print(f"\n### Log Level: {log_level}")
+        for collection, query_patterns in collections.items():
+            print(f"  - Collection: {collection}")
+            for pattern, count in sorted(query_patterns.items(), key=lambda x: x[1], reverse=True):
+                print(f"    - Pattern: {pattern} -> Count: {count}")
+
+if __name__ == "__main__":
+    log_file_path = "solr_logs.txt"  # Replace with your actual log file path
+    main(log_file_path)
 
 
 ```
