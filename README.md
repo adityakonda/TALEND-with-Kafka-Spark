@@ -31,13 +31,12 @@ import re
 import collections
 import os
 
-def extract_info_queries_by_collection(log_file):
-    """Extracts collections and query patterns only from INFO log entries."""
-    collection_queries = collections.defaultdict(collections.Counter)
+def extract_query_patterns(log_file):
+    """Extracts and counts unique query patterns from INFO log entries."""
+    query_patterns = collections.Counter()
 
     # Updated regex patterns
     info_log_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\s+INFO\b")  # Match timestamp + INFO
-    collection_regex = re.compile(r"\[c:\s*([^]\s]+)]")  # Extract collection name
     query_regex = re.compile(r"[?&]q=([^&\s]+)")  # Extract query string
 
     # Check if file exists
@@ -47,21 +46,18 @@ def extract_info_queries_by_collection(log_file):
 
     with open(log_file, 'r', encoding='utf-8-sig') as file:
         for line in file:
-            if info_log_regex.search(line):  # Process only INFO logs with timestamps
-                collection_match = collection_regex.search(line)
+            if info_log_regex.search(line):  # Process only INFO logs
                 query_match = query_regex.search(line)
-
-                if collection_match and query_match:
-                    collection = collection_match.group(1).strip()  # Extract collection name
+                if query_match:
                     raw_query = query_match.group(1).strip()  # Extract raw query
                     
                     # Normalize query pattern (remove values)
                     query_pattern = normalize_query(raw_query)
 
-                    # Count the query patterns under each collection
-                    collection_queries[collection][query_pattern] += 1
+                    # Count the query patterns
+                    query_patterns[query_pattern] += 1
 
-    return collection_queries
+    return query_patterns
 
 def normalize_query(query):
     """Replaces dynamic values in queries with placeholders to detect patterns."""
@@ -72,18 +68,16 @@ def normalize_query(query):
     return query
 
 def main(log_file):
-    collection_queries = extract_info_queries_by_collection(log_file)
+    query_patterns = extract_query_patterns(log_file)
 
-    if not collection_queries:
-        print("\nNo INFO log entries with queries found in the file.")
+    if not query_patterns:
+        print("\nNo query patterns found in INFO logs.")
         return
 
     # Display results
-    print("\nQuery Patterns Count Per Collection (INFO Logs Only):\n")
-    for collection, query_patterns in collection_queries.items():
-        print(f"\nCollection: {collection}")
-        for pattern, count in sorted(query_patterns.items(), key=lambda x: x[1], reverse=True):
-            print(f"  Pattern: {pattern} -> Count: {count}")
+    print("\nQuery Patterns Count (INFO Logs Only):\n")
+    for pattern, count in sorted(query_patterns.items(), key=lambda x: x[1], reverse=True):
+        print(f"Pattern: {pattern} -> Count: {count}")
 
 if __name__ == "__main__":
     log_file_path = r"C:\Users\adity\Downloads\test.log"  # Update with your actual file path
