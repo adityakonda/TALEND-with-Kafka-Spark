@@ -118,6 +118,41 @@ def normalize_query(query):
 
 
 
+def normalize_query(query):
+    """Replaces multiple values in queries with placeholders and ensures all keys are captured correctly."""
+
+    # Replace multiple numbers inside parentheses with a single <NUM>
+    query = re.sub(r"\(\d+(?:\s+\d+)*\)", "(<NUM>)", query)
+
+    # Replace multiple numbers (outside parentheses) with a single <NUM>
+    query = re.sub(r"\b\d+(\s+\d+)*\b", "<NUM>", query)
+
+    # Replace boolean values (YES/NO/TRUE/FALSE) with <VAL>
+    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)
+
+    # Ensure each (<VAL>) and (<NUM>) has a valid key before it
+    query = re.sub(r"([&|])\s*:\s*\(<VAL>\)", r"\1 MISSING_KEY:(<VAL>)", query)
+    query = re.sub(r"([&|])\s*:\s*\(<NUM>\)", r"\1 MISSING_KEY:(<NUM>)", query)
+
+    # Ensure every key is properly formatted before values
+    query = re.sub(r"\b([&|]+)\s*\(<VAL>\)", r"\1 MISSING_KEY:(<VAL>)", query)
+    query = re.sub(r"\b([&|]+)\s*\(<NUM>\)", r"\1 MISSING_KEY:(<NUM>)", query)
+
+    # Replace GUIDs, hashes, and long alphanumeric IDs with <ID>
+    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)
+
+    # Ensure missing keys get replaced with 'UNKNOWN_KEY'
+    query = re.sub(r":\(<VAL>\)", "UNKNOWN_KEY:(<VAL>)", query)
+    query = re.sub(r":\(<NUM>\)", "UNKNOWN_KEY:(<NUM>)", query)
+
+    # Replace key=value pairs with key:(<VAL>) for consistency
+    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:(<VAL>)", query)
+
+    return query
+
+
+
+
 ```
 
 
