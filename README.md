@@ -26,130 +26,63 @@
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
 ```
-
 import os
 import re
-import collections
+from datetime import datetime
 
-def extract_info_queries_from_folder(folder_path):
-    """Extracts query patterns from all log files in a folder."""
-    collection_queries = collections.defaultdict(collections.Counter)
+def extract_timestamps_from_folder(folder_path):
+    """Extracts all timestamps from log files in a folder."""
+    timestamp_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}")  # Match timestamp format
+    timestamps = []
 
-    # Get all .log files in the folder
+    # Loop through all log files in the folder
     for filename in os.listdir(folder_path):
         if filename.endswith(".log"):  # Process only .log files
             file_path = os.path.join(folder_path, filename)
-            print(f"Processing: {file_path}")  # Debug: Show which file is being processed
-            process_log_file(file_path, collection_queries)  # Process each file
+            print(f"Processing file: {file_path}")  # Debug: Show which file is being processed
+            with open(file_path, 'r', encoding='utf-8-sig') as file:
+                for line in file:
+                    match = timestamp_regex.search(line)
+                    if match:
+                        timestamps.append(match.group())  # Store timestamp strings
 
-    return collection_queries
+    return timestamps
 
-def process_log_file(log_file, collection_queries):
-    """Extracts queries from a single log file and updates collection_queries dictionary."""
-    info_log_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\s+INFO\b")  # Match timestamp + INFO
-    collection_regex = re.compile(r"\[c:\s*([\w\s-]+)]")  # Extract collection name
-    query_regex = re.compile(r"q=([^&\s]+)")  # Extract query string
+def calculate_time_range(timestamps):
+    """Finds min(TS), max(TS) and calculates time difference."""
+    if not timestamps:
+        return None, None, None  # Return None if no timestamps found
 
-    with open(log_file, 'r', encoding='utf-8-sig') as file:
-        for line in file:
-            if info_log_regex.search(line):  # Process only INFO logs
-                collection_match = collection_regex.search(line)
-                query_match = query_regex.search(line)
+    # Convert timestamps to datetime objects
+    datetime_timestamps = [datetime.strptime(ts, "%Y-%m-%d %H:%M:%S.%f") for ts in timestamps]
 
-                if collection_match and query_match:
-                    collection = collection_match.group(1).strip()  # Extract collection name
-                    raw_query = query_match.group(1).strip()  # Extract raw query
+    # Get min and max timestamps
+    min_ts = min(datetime_timestamps)
+    max_ts = max(datetime_timestamps)
 
-                    # Normalize query pattern
-                    query_pattern = normalize_query(raw_query)
+    # Calculate total time difference
+    total_time_diff = (max_ts - min_ts).total_seconds()  # Convert to seconds
 
-                    # Count occurrences of query patterns per collection
-                    collection_queries[collection][query_pattern] += 1
-
-def normalize_query(query):
-    """Replaces dynamic values in queries with placeholders to detect patterns."""
-    query = re.sub(r"\b\d+\b", "<NUM>", query)  # Replace numbers
-    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)  # Boolean values
-    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)  # Replace IDs, GUIDs
-    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:<VAL>", query)  # Replace key-value pairs
-    return query
+    return min_ts, max_ts, total_time_diff
 
 def main(folder_path):
-    collection_queries = extract_info_queries_from_folder(folder_path)
+    timestamps = extract_timestamps_from_folder(folder_path)
 
-    if not collection_queries:
-        print("\nNo INFO log entries with queries found in the folder.")
+    if not timestamps:
+        print("No timestamps found in the log files.")
         return
 
-    # Display results
-    print("\nQuery Patterns Count Per Collection (INFO Logs Only):\n")
-    for collection, query_patterns in collection_queries.items():
-        print(f"\nCollection: {collection}")
-        for pattern, count in sorted(query_patterns.items(), key=lambda x: x[1], reverse=True):
-            print(f"  Pattern: {pattern} -> Count: {count}")
+    min_ts, max_ts, total_diff = calculate_time_range(timestamps)
+
+    # Print the results
+    print("\nTimestamp Summary:")
+    print(f"Min(TS) : {min_ts}")
+    print(f"Max(TS) : {max_ts}")
+    print(f"Total Time Difference: {total_diff} seconds")
 
 if __name__ == "__main__":
     folder_path = r"C:\Users\adity\Downloads\logs_folder"  # Update with your actual folder path
     main(folder_path)
-
-
-def normalize_query(query):
-    """Replaces multiple values in queries with placeholders and ensures single placeholders inside parentheses."""
-    
-    # Replace multiple numbers inside parentheses with a single <NUM>
-    query = re.sub(r"\(\d+(?:\s+\d+)*\)", "(<NUM>)", query)
-    
-    # Replace multiple numbers (outside parentheses) with a single <NUM>
-    query = re.sub(r"\b\d+(\s+\d+)*\b", "<NUM>", query)
-
-    # Replace boolean values (YES/NO/TRUE/FALSE) with <VAL>
-    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)
-
-    # Replace multiple <VAL> occurrences inside parentheses with a single <VAL>
-    query = re.sub(r"\([^)]+\)", "(<VAL>)", query)
-
-    # Replace GUIDs, hashes, and long alphanumeric IDs with <ID>
-    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)
-
-    # Replace key=value pairs with key:<VAL> for consistency
-    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:(<VAL>)", query)
-
-    return query
-
-
-
-def normalize_query(query):
-    """Replaces multiple values in queries with placeholders and ensures all keys are captured correctly."""
-
-    # Replace multiple numbers inside parentheses with a single <NUM>
-    query = re.sub(r"\(\d+(?:\s+\d+)*\)", "(<NUM>)", query)
-
-    # Replace multiple numbers (outside parentheses) with a single <NUM>
-    query = re.sub(r"\b\d+(\s+\d+)*\b", "<NUM>", query)
-
-    # Replace boolean values (YES/NO/TRUE/FALSE) with <VAL>
-    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)
-
-    # Ensure each (<VAL>) and (<NUM>) has a valid key before it
-    query = re.sub(r"([&|])\s*:\s*\(<VAL>\)", r"\1 MISSING_KEY:(<VAL>)", query)
-    query = re.sub(r"([&|])\s*:\s*\(<NUM>\)", r"\1 MISSING_KEY:(<NUM>)", query)
-
-    # Ensure every key is properly formatted before values
-    query = re.sub(r"\b([&|]+)\s*\(<VAL>\)", r"\1 MISSING_KEY:(<VAL>)", query)
-    query = re.sub(r"\b([&|]+)\s*\(<NUM>\)", r"\1 MISSING_KEY:(<NUM>)", query)
-
-    # Replace GUIDs, hashes, and long alphanumeric IDs with <ID>
-    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)
-
-    # Ensure missing keys get replaced with 'UNKNOWN_KEY'
-    query = re.sub(r":\(<VAL>\)", "UNKNOWN_KEY:(<VAL>)", query)
-    query = re.sub(r":\(<NUM>\)", "UNKNOWN_KEY:(<NUM>)", query)
-
-    # Replace key=value pairs with key:(<VAL>) for consistency
-    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:(<VAL>)", query)
-
-    return query
-
 
 
 
