@@ -93,6 +93,31 @@ if __name__ == "__main__":
     main(folder_path)
 
 
+def normalize_query(query):
+    """Replaces multiple values in queries with placeholders and ensures single placeholders inside parentheses."""
+    
+    # Replace multiple numbers inside parentheses with a single <NUM>
+    query = re.sub(r"\(\d+(?:\s+\d+)*\)", "(<NUM>)", query)
+    
+    # Replace multiple numbers (outside parentheses) with a single <NUM>
+    query = re.sub(r"\b\d+(\s+\d+)*\b", "<NUM>", query)
+
+    # Replace boolean values (YES/NO/TRUE/FALSE) with <VAL>
+    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)
+
+    # Replace multiple <VAL> occurrences inside parentheses with a single <VAL>
+    query = re.sub(r"\([^)]+\)", "(<VAL>)", query)
+
+    # Replace GUIDs, hashes, and long alphanumeric IDs with <ID>
+    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)
+
+    # Replace key=value pairs with key:<VAL> for consistency
+    query = re.sub(r"([a-zA-Z_]+):([^:\s]+)", r"\1:(<VAL>)", query)
+
+    return query
+
+
+
 ```
 
 
