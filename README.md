@@ -26,65 +26,98 @@
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
 ```
-import os
 import re
-from datetime import datetime
+import collections
+import os
+import logging
+import urllib.parse
+import statistics
+import pandas as pd
 
-def extract_timestamps_from_folder(folder_path):
-    """Extracts all timestamps from log files in a folder."""
-    timestamp_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}")  # Match timestamp format
-    timestamps = []
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-    # Loop through all log files in the folder
-    for filename in os.listdir(folder_path):
-        if filename.endswith(".log"):  # Process only .log files
-            file_path = os.path.join(folder_path, filename)
-            print(f"Processing file: {file_path}")  # Debug: Show which file is being processed
-            with open(file_path, 'r', encoding='utf-8-sig') as file:
-                for line in file:
-                    match = timestamp_regex.search(line)
-                    if match:
-                        timestamps.append(match.group())  # Store timestamp strings
+def extract_query_patterns(log_file):
+    """Extracts query patterns, sort patterns, and QTime statistics per collection from INFO log entries."""
+    query_data = collections.defaultdict(lambda: collections.defaultdict(list))
 
-    return timestamps
+    # Compiled regex patterns
+    info_log_regex = re.compile(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\s+INFO\b")  # Match timestamp + INFO
+    query_regex = re.compile(r"[?&]q=([^&\s]+)")  # Extract query string
+    qtime_regex = re.compile(r"QTime=(\d+)")  # Extract QTime
+    collection_regex = re.compile(r"[?&]collection=([^&\s]+)")  # Extract collection name
+    sort_regex = re.compile(r"[?&]sort=([^&\s]+)")  # Extract sort pattern
 
-def calculate_time_range(timestamps):
-    """Finds min(TS), max(TS) and calculates time difference."""
-    if not timestamps:
-        return None, None, None  # Return None if no timestamps found
+    # Check if file exists
+    if not os.path.exists(log_file):
+        logging.error(f"File '{log_file}' not found.")
+        return None
 
-    # Convert timestamps to datetime objects
-    datetime_timestamps = [datetime.strptime(ts, "%Y-%m-%d %H:%M:%S.%f") for ts in timestamps]
+    with open(log_file, 'r', encoding='utf-8-sig') as file:
+        for line in file:
+            if info_log_regex.search(line):  # Process only INFO logs
+                query_match = query_regex.search(line)
+                qtime_match = qtime_regex.search(line)
+                collection_match = collection_regex.search(line)
+                sort_match = sort_regex.search(line)
 
-    # Get min and max timestamps
-    min_ts = min(datetime_timestamps)
-    max_ts = max(datetime_timestamps)
+                if query_match and qtime_match and collection_match:
+                    raw_query = urllib.parse.unquote(query_match.group(1).strip())  # Decode URL encoding
+                    collection = urllib.parse.unquote(collection_match.group(1).strip())  # Extract collection
+                    qtime = int(qtime_match.group(1))  # Extract QTime as integer
+                    sort_pattern = sort_match.group(1) if sort_match else "default"  # Extract sort, default if missing
 
-    # Calculate total time difference
-    total_time_diff = (max_ts - min_ts).total_seconds()  # Convert to seconds
+                    # Normalize query pattern (remove values)
+                    query_pattern = normalize_query(raw_query)
 
-    return min_ts, max_ts, total_time_diff
+                    # Store QTime for (collection, query pattern, sort pattern)
+                    query_data[collection][(query_pattern, sort_pattern)].append(qtime)
 
-def main(folder_path):
-    timestamps = extract_timestamps_from_folder(folder_path)
+    return query_data
 
-    if not timestamps:
-        print("No timestamps found in the log files.")
+def normalize_query(query):
+    """Replaces dynamic values in queries with placeholders to detect patterns."""
+    query = re.sub(r"\b\d+\b", "<NUM>", query)  # Replace numbers
+    query = re.sub(r"\b(YES|NO|TRUE|FALSE)\b", "<VAL>", query, flags=re.IGNORECASE)  # Boolean values
+    query = re.sub(r"\b[A-Fa-f0-9]{8,}\b", "<ID>", query)  # Replace IDs, GUIDs
+    query = re.sub(r"([a-zA-Z_]+):([^\s&]+)", r"\1:<VAL>", query)  # Handle key-value pairs more robustly
+    return query
+
+def compute_qtime_statistics(query_data):
+    """Computes count, min, max, and avg QTime per (collection, query pattern, sort pattern)."""
+    result = []
+    for collection, queries in query_data.items():
+        for (query_pattern, sort_pattern), qtimes in queries.items():
+            result.append({
+                "Collection": collection,
+                "Query Pattern": query_pattern,
+                "Sort Pattern": sort_pattern,
+                "Count": len(qtimes),
+                "Min QTime (ms)": min(qtimes),
+                "Max QTime (ms)": max(qtimes),
+                "Avg QTime (ms)": round(statistics.mean(qtimes), 2),
+            })
+    return result
+
+def main(log_file):
+    query_data = extract_query_patterns(log_file)
+
+    if not query_data:
+        logging.info("No query patterns found in INFO logs.")
         return
 
-    min_ts, max_ts, total_diff = calculate_time_range(timestamps)
+    # Compute QTime statistics
+    stats = compute_qtime_statistics(query_data)
 
-    # Print the results
-    print("\nTimestamp Summary:")
-    print(f"Min(TS) : {min_ts}")
-    print(f"Max(TS) : {max_ts}")
-    print(f"Total Time Difference: {total_diff} seconds")
+    # Convert results to DataFrame and display
+    df = pd.DataFrame(stats)
+    df = df.sort_values(by=["Collection", "Avg QTime (ms)"], ascending=[True, False])  # Sort by Collection & Avg QTime
+    import ace_tools as tools
+    tools.display_dataframe_to_user(name="Query Patterns QTime Statistics", dataframe=df)
 
 if __name__ == "__main__":
-    folder_path = r"C:\Users\adity\Downloads\logs_folder"  # Update with your actual folder path
-    main(folder_path)
-
-
+    log_file_path = r"C:\Users\adity\Downloads\test.log"  # Update with your actual file path
+    main(log_file_path)
 
 ```
 
