@@ -32,7 +32,7 @@ import re
 # Sample data
 df1 = pd.DataFrame({
     'product_family': ['cat+dog', 'bird_sr, fish', 'horse.cat', 'tiger+lion'],
-    'other_info_df1': [1, 2, 3, 4]
+    'description': ['pets', 'aquatic', 'farm animal', 'wildlife']
 })
 
 df2 = pd.DataFrame({
@@ -42,30 +42,33 @@ df2 = pd.DataFrame({
 
 # Function to clean and split text into tokens
 def clean_and_split(text):
-    # Remove special characters (keep only alphanumerics and space)
     text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)
-    # Convert to lowercase and split into words
     return text.lower().split()
 
-# Apply cleaning
+# Tokenize both DataFrames
 df1['pf_tokens'] = df1['product_family'].apply(clean_and_split)
 df2['pn_tokens'] = df2['product_name'].apply(clean_and_split)
 
-# Cross join
+# Create cross join
 df1['key'] = 1
 df2['key'] = 1
-cross = df1.merge(df2, on='key').drop('key', axis=1)
+cross = df2.merge(df1, on='key').drop('key', axis=1)
 
-# Match if any token in df2 exists in df1 token list
+# Check if any tokens match
 cross['match'] = cross.apply(lambda row: any(token in row['pf_tokens'] for token in row['pn_tokens']), axis=1)
 
-# Get matching df2 rows only
-result = cross[cross['match']].drop(columns=['pf_tokens', 'pn_tokens', 'match', 'product_family', 'other_info_df1'])
+# Filter only matching rows
+matched = cross[cross['match']].copy()
 
-# Optional: drop duplicates
-result = result.drop_duplicates().reset_index(drop=True)
+# In case of multiple matches, keep one or aggregate — here, we’ll keep the first match
+matched = matched.drop_duplicates(subset=['product_name'])
 
-import ace_tools as tools; tools.display_dataframe_to_user(name="Cleaned Matching Rows from df2", dataframe=result)
+# Now merge back with df2 to ensure left join
+result = df2.merge(matched[['product_name', 'description']], on='product_name', how='left')
+
+# Final result
+print(result)
+
 
 
 ```
