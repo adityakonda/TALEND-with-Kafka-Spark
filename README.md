@@ -70,6 +70,12 @@ result = df2.merge(matched[['product_name', 'description']], on='product_name', 
 print(result)
 
 
+def clean_and_split(text):
+    if not isinstance(text, str):
+        return []
+    text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)  # remove punctuation
+    tokens = text.lower().split()
+    return [token for token in tokens if token != 'sr']  # remove "sr" token
 
 ```
 
