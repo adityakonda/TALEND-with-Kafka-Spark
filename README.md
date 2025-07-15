@@ -80,24 +80,9 @@ def clean_and_split(text):
 ```
 
 
-@echo off
-setlocal
-set "input_file=hostnames.txt"
-set "output_file=output.csv"
-
-if exist "%output_file%" del "%output_file%"
-
-echo Hostname,IP Address > "%output_file%"
-
-for /f "usebackq delims=" %%A in ("%input_file%") do (
-    echo Resolving %%A...
-    for /f "tokens=2 delims=[]" %%B in ('ping -n 1 %%A ^| findstr "["') do (
-        echo %%A,%%B >> "%output_file%"
-        echo %%A,%%B
-    )
-)
-
-echo Results saved to %output_file%
-endlocal
-
-
+db.claims.createIndexes([
+  { key: { fNbr: 1 }, name: "fNbr_1" },
+  { key: { cntrId: 1 }, name: "cntrId_1" },
+  { key: { cntrId: 1, mbrId: 1, fstSvcBegnDt: 1 }, name: "cntrId_1_mbrId_1_fstSvcBegnDt_1" },
+  { key: { cntrId: 1, mbrId: 1, recvdDt: 1 }, name: "cntrId_1_mbrId_1_recvdDt_1" }
+])
