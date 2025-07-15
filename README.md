@@ -77,6 +77,15 @@ def clean_and_split(text):
     tokens = text.lower().split()
     return [token for token in tokens if token != 'sr']  # remove "sr" token
 
+db.<collection>.createIndexes([
+  { key: { field1: 1 }, name: "idx_field1" },
+  { key: { field2: 1 }, name: "idx_field2" },
+  { key: { field3: 1 }, name: "idx_field3" },
+  { key: { compField1a: 1, compField1b: 1 }, name: "idx_comp1" },
+  { key: { compField2a: 1, compField2b: -1 }, name: "idx_comp2" }
+])
+
+
 ```
 
 
