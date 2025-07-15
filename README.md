@@ -85,6 +85,17 @@ db.<collection>.createIndexes([
   { key: { compField2a: 1, compField2b: -1 }, name: "idx_comp2" }
 ])
 
+db.testCollection.insertOne({ name: "John", age: 30, city: "NY", state: "NY", dept: "Sales", team: "A" })
+
+db.testCollection.createIndexes([
+  { key: { name: 1 }, name: "name_idx" },
+  { key: { age: 1 }, name: "age_idx" },
+  { key: { city: 1 }, name: "city_idx" },
+  { key: { city: 1, state: 1 }, name: "city_state_idx" },
+  { key: { dept: 1, team: -1 }, name: "dept_team_idx" }
+])
+
+
 
 ```
 
