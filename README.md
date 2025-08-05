@@ -19,7 +19,34 @@
 ```
 3.  ###### Creating Producer in Kafka ######
 ```
-	$  kafka-console-producer --broker-list quickstart.cloudera:9092 --topic mytopic
+# Step 5: Fetch the last message (if any)
+if [[ "$last_offset" -eq 0 ]]; then
+  last_msg="NO_MESSAGE"
+else
+  read_offset=$((last_offset - 1))
+  last_msg=$(kafka-console-consumer.sh \
+    --bootstrap-server "$BROKERS" \
+    --topic "$TOPIC" \
+    --partition "$last_partition" \
+    --offset "$read_offset" \
+    --max-messages 1 \
+    --timeout-ms 5000 2>/dev/null | tr -d '\n' | tr -d '\r')
+
+  # Fallback: if message still empty, read from beginning and get last one
+  if [[ -z "$last_msg" ]]; then
+    last_msg=$(kafka-console-consumer.sh \
+      --bootstrap-server "$BROKERS" \
+      --topic "$TOPIC" \
+      --partition "$last_partition" \
+      --from-beginning \
+      --timeout-ms 5000 2>/dev/null | tail -n 1 | tr -d '\n' | tr -d '\r')
+  fi
+
+  # Final fallback check
+  if [[ -z "$last_msg" ]]; then
+    last_msg="NO_MESSAGE"
+  fi
+fi
 ```
 4. ###### Creating Consumer in Kafka ######
 ```
