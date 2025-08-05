@@ -28,11 +28,11 @@
 ```
 #!/bin/bash
 
-# Load properties
+# Load Kafka config
 source kafka.properties
 
-if [[ -z "$BROKERS" || -z "$TOPICS" ]]; then
-  echo "BROKERS and TOPICS must be set in kafka.properties"
+if [[ -z "$BROKERS" ]]; then
+  echo "❌ BROKERS must be set in kafka.properties"
   exit 1
 fi
 
@@ -40,39 +40,45 @@ fi
 OUTPUT_FILE="kafka_topic_summary.txt"
 echo "Topic|TotalMessageCount|LastMessage" > "$OUTPUT_FILE"
 
-# Split topics into an array
-IFS=',' read -ra TOPIC_ARRAY <<< "$TOPICS"
+echo "📡 Connecting to cluster: $BROKERS"
+echo "🔍 Fetching all topics..."
 
-echo "Using brokers: $BROKERS"
-echo "Topics to process: ${#TOPIC_ARRAY[@]}"
-echo "Writing output to: $OUTPUT_FILE"
+# Get all topic names
+TOPICS=$(kafka-topics.sh --bootstrap-server "$BROKERS" --list 2>/dev/null)
+
+if [[ -z "$TOPICS" ]]; then
+  echo "❌ No topics found or broker unreachable."
+  exit 1
+fi
+
+echo "✅ Found $(echo "$TOPICS" | wc -l) topics"
 echo "----------------------------------------"
 
-# Process each topic
-for TOPIC in "${TOPIC_ARRAY[@]}"; do
-  echo "Processing topic: $TOPIC"
+# Loop through each topic
+for TOPIC in $TOPICS; do
+  echo "🔄 Processing topic: $TOPIC"
 
-  # Get latest offsets (per partition)
+  # Step 1: Get latest offsets per partition
   offsets_output=$(kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list "$BROKERS" --topic "$TOPIC" --time -1 2>/dev/null)
 
   if [[ -z "$offsets_output" ]]; then
-    echo "  ❌ Topic not found or no data available"
-    echo "$TOPIC|ERROR|No Data" >> "$OUTPUT_FILE"
+    echo "  ❌ Could not fetch offsets"
+    echo "$TOPIC|ERROR|NO DATA" >> "$OUTPUT_FILE"
     continue
   fi
 
-  # Calculate total messages
+  # Step 2: Sum total message count across all partitions
   total_count=$(echo "$offsets_output" | awk -F ':' '{sum += $3} END {print sum}')
-  echo "  ✅ Total messages: $total_count"
+  echo "  📊 Total messages: $total_count"
 
-  # Get the highest partition (last one)
+  # Step 3: Identify the highest partition number
   last_partition=$(echo "$offsets_output" | awk -F ':' '{print $2}' | sort -nr | head -1)
 
-  # Get last offset in that partition
+  # Step 4: Get the last offset of that partition
   last_offset=$(echo "$offsets_output" | grep ":$last_partition:" | awk -F ':' '{print $3}')
   read_offset=$((last_offset - 1))
 
-  # Read last message
+  # Step 5: Fetch the last message (if any)
   last_msg=$(kafka-console-consumer.sh \
     --bootstrap-server "$BROKERS" \
     --topic "$TOPIC" \
@@ -81,19 +87,19 @@ for TOPIC in "${TOPIC_ARRAY[@]}"; do
     --max-messages 1 \
     --timeout-ms 5000 2>/dev/null | tr -d '\n' | tr -d '\r')
 
-  # If empty, set a default
   if [[ -z "$last_msg" ]]; then
     last_msg="NO_MESSAGE"
   fi
 
-  # Write to file
+  # Step 6: Append result to output file
   echo "$TOPIC|$total_count|$last_msg" >> "$OUTPUT_FILE"
-
-  echo "  ✅ Last message (partition $last_partition): $last_msg"
+  echo "  📥 Last message (partition $last_partition): $last_msg"
   echo
 done
 
-echo "✅ Done. Output saved to $OUTPUT_FILE"
+echo "✅ All topics processed."
+echo "📄 Results written to: $OUTPUT_FILE"
+
 
 ```
 
