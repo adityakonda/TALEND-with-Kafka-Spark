@@ -26,76 +26,74 @@
 	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
 ```
 ```
-import pandas as pd
-import re
+#!/bin/bash
 
-# Sample data
-df1 = pd.DataFrame({
-    'product_family': ['cat+dog', 'bird_sr, fish', 'horse.cat', 'tiger+lion'],
-    'description': ['pets', 'aquatic', 'farm animal', 'wildlife']
-})
+# Load properties
+source kafka.properties
 
-df2 = pd.DataFrame({
-    'product_name': ['dog', 'fish', 'lion', 'whale', 'bird', 'sr'],
-    'other_info_df2': [10, 20, 30, 40, 50, 60]
-})
+if [[ -z "$BROKERS" || -z "$TOPICS" ]]; then
+  echo "BROKERS and TOPICS must be set in kafka.properties"
+  exit 1
+fi
 
-# Function to clean and split text into tokens
-def clean_and_split(text):
-    text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)
-    return text.lower().split()
+# Output file
+OUTPUT_FILE="kafka_topic_summary.txt"
+echo "Topic|TotalMessageCount|LastMessage" > "$OUTPUT_FILE"
 
-# Tokenize both DataFrames
-df1['pf_tokens'] = df1['product_family'].apply(clean_and_split)
-df2['pn_tokens'] = df2['product_name'].apply(clean_and_split)
+# Split topics into an array
+IFS=',' read -ra TOPIC_ARRAY <<< "$TOPICS"
 
-# Create cross join
-df1['key'] = 1
-df2['key'] = 1
-cross = df2.merge(df1, on='key').drop('key', axis=1)
+echo "Using brokers: $BROKERS"
+echo "Topics to process: ${#TOPIC_ARRAY[@]}"
+echo "Writing output to: $OUTPUT_FILE"
+echo "----------------------------------------"
 
-# Check if any tokens match
-cross['match'] = cross.apply(lambda row: any(token in row['pf_tokens'] for token in row['pn_tokens']), axis=1)
+# Process each topic
+for TOPIC in "${TOPIC_ARRAY[@]}"; do
+  echo "Processing topic: $TOPIC"
 
-# Filter only matching rows
-matched = cross[cross['match']].copy()
+  # Get latest offsets (per partition)
+  offsets_output=$(kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list "$BROKERS" --topic "$TOPIC" --time -1 2>/dev/null)
 
-# In case of multiple matches, keep one or aggregate — here, we’ll keep the first match
-matched = matched.drop_duplicates(subset=['product_name'])
+  if [[ -z "$offsets_output" ]]; then
+    echo "  ❌ Topic not found or no data available"
+    echo "$TOPIC|ERROR|No Data" >> "$OUTPUT_FILE"
+    continue
+  fi
 
-# Now merge back with df2 to ensure left join
-result = df2.merge(matched[['product_name', 'description']], on='product_name', how='left')
+  # Calculate total messages
+  total_count=$(echo "$offsets_output" | awk -F ':' '{sum += $3} END {print sum}')
+  echo "  ✅ Total messages: $total_count"
 
-# Final result
-print(result)
+  # Get the highest partition (last one)
+  last_partition=$(echo "$offsets_output" | awk -F ':' '{print $2}' | sort -nr | head -1)
 
+  # Get last offset in that partition
+  last_offset=$(echo "$offsets_output" | grep ":$last_partition:" | awk -F ':' '{print $3}')
+  read_offset=$((last_offset - 1))
 
-def clean_and_split(text):
-    if not isinstance(text, str):
-        return []
-    text = re.sub(r'[^a-zA-Z0-9\s]', ' ', text)  # remove punctuation
-    tokens = text.lower().split()
-    return [token for token in tokens if token != 'sr']  # remove "sr" token
+  # Read last message
+  last_msg=$(kafka-console-consumer.sh \
+    --bootstrap-server "$BROKERS" \
+    --topic "$TOPIC" \
+    --partition "$last_partition" \
+    --offset "$read_offset" \
+    --max-messages 1 \
+    --timeout-ms 5000 2>/dev/null | tr -d '\n' | tr -d '\r')
 
-db.<collection>.createIndexes([
-  { key: { field1: 1 }, name: "idx_field1" },
-  { key: { field2: 1 }, name: "idx_field2" },
-  { key: { field3: 1 }, name: "idx_field3" },
-  { key: { compField1a: 1, compField1b: 1 }, name: "idx_comp1" },
-  { key: { compField2a: 1, compField2b: -1 }, name: "idx_comp2" }
-])
+  # If empty, set a default
+  if [[ -z "$last_msg" ]]; then
+    last_msg="NO_MESSAGE"
+  fi
 
-db.testCollection.insertOne({ name: "John", age: 30, city: "NY", state: "NY", dept: "Sales", team: "A" })
+  # Write to file
+  echo "$TOPIC|$total_count|$last_msg" >> "$OUTPUT_FILE"
 
-db.testCollection.createIndexes([
-  { key: { name: 1 }, name: "name_idx" },
-  { key: { age: 1 }, name: "age_idx" },
-  { key: { city: 1 }, name: "city_idx" },
-  { key: { city: 1, state: 1 }, name: "city_state_idx" },
-  { key: { dept: 1, team: -1 }, name: "dept_team_idx" }
-])
+  echo "  ✅ Last message (partition $last_partition): $last_msg"
+  echo
+done
 
-
+echo "✅ Done. Output saved to $OUTPUT_FILE"
 
 ```
 
