@@ -23,7 +23,12 @@
 ```
 4. ###### Creating Consumer in Kafka ######
 ```
-	$ kafka-console-consumer --zookeeper quickstart.cloudera:2181 --topic mytopic --from-beginning
+IFS=',' read -ra TOPIC_ARRAY <<< "$TOPICS"
+
+echo "📦 Topics to process: ${#TOPIC_ARRAY[@]}"
+
+for TOPIC in "${TOPIC_ARRAY[@]}"; do
+  echo "🔄 Processing topic: $TOPIC"
 ```
 ```
 #!/bin/bash
