@@ -10,7 +10,7 @@
 
 1.  ###### List all Topic in a Kafka ######
 ```
-	 $ kafka-topics --zookeeper quickstart.cloudera:2181 --list 
+| tail -n 1 | tr -d '\n' | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | tr -s ' '
 ```
 	
 2. ###### Create a Topic in Kafka ######
