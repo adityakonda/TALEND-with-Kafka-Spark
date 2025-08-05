@@ -18,8 +18,13 @@ hash_value=$(echo -n "$last_msg" | sha256sum | awk '{print $1}')
 	
 2. ###### Create a Topic in Kafka ######
 ```
-	$ kafka-topics --create --zookeeper quickstart.cloudera:2181 --replication-factor 1 --partitions 3 --topic mytopic
-```
+if [[ "$hash_1" == "$hash_2" ]]; then
+  result=true
+else
+  result=false
+fi
+
+echo "$result"```
 3.  ###### Creating Producer in Kafka ######
 ```
 # Step 5: Fetch the last message (if any)
