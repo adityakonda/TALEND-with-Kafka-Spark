@@ -11,6 +11,9 @@
 1.  ###### List all Topic in a Kafka ######
 ```
 | tail -n 1 | tr -d '\n' | tr -d '\r' | sed 's/^[ \t]*//;s/[ \t]*$//' | tr -s ' '
+
+hash_value=$(echo -n "$last_msg" | sha256sum | awk '{print $1}')
+
 ```
 	
 2. ###### Create a Topic in Kafka ######
