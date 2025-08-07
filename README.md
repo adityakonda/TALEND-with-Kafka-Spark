@@ -1,7 +1,7 @@
 # TALEND-with-Kafka-Spark
 
 ## Big Data Advance - Spark 6.0 ##
-
+```
 if [[ -z "$retention_ms" ]]; then
   retention_ms="default"
   retention_days="default"
@@ -11,7 +11,7 @@ fi
 
 echo "  🕒 Retention.ms: $retention_ms ($retention_days days)"
 
-
+```
 1. **Publishing Messages to Kafka Topic**
 2. **Consuming Messsage from Kafka**
 
