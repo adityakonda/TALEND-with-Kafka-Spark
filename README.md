@@ -2,6 +2,10 @@
 
 ## Big Data Advance - Spark 6.0 ##
 ```
+
+retention_ms=$(kafka-topics.sh --bootstrap-server "$BROKERS" --describe --topic "$TOPIC" 2>/dev/null | \
+  grep 'retention.ms' | sed -n 's/.*retention.ms=\([0-9]*\).*/\1/p')
+
 if [[ -z "$retention_ms" ]]; then
   retention_ms="default"
   retention_days="default"
