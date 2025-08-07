@@ -2,6 +2,16 @@
 
 ## Big Data Advance - Spark 6.0 ##
 
+if [[ -z "$retention_ms" ]]; then
+  retention_ms="default"
+  retention_days="default"
+else
+  retention_days=$((retention_ms / 1000 / 60 / 60 / 24))
+fi
+
+echo "  🕒 Retention.ms: $retention_ms ($retention_days days)"
+
+
 1. **Publishing Messages to Kafka Topic**
 2. **Consuming Messsage from Kafka**
 
@@ -308,8 +318,15 @@ for TOPIC in $TOPICS; do
   echo
 done
 
-echo "✅ All topics processed."
-echo "📄 Results written to: $OUTPUT_FILE"
+if [[ -z "$retention_ms" ]]; then
+  retention_ms="default"
+  retention_days="default"
+else
+  retention_days=$((retention_ms / 1000 / 60 / 60 / 24))
+fi
+
+echo "  🕒 Retention.ms: $retention_ms ($retention_days days)"
+
 
 
 ```
