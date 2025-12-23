@@ -1,0 +1,87 @@
+Kafka SOP
+
+
+This report is generated to compare the existing Kafka cluster with the new Kafka cluster during migration or validation activities. We run the same Kafka_report.sh script on both the existing cluster and the new cluster and then compare the outputs.
+
+The comparison helps us identify any discrepancies, such as differences in:
+
+Topic counts or partition counts
+
+Message volumes
+
+Consumer group offsets and lag
+
+Retention settings
+
+By reviewing these reports side by side in a spreadsheet, we can confirm that the new cluster is aligned with the existing cluster and that there are no data gaps or unexpected behavior before fully switching over.
+
+
+Steps to Run the Report and Compare Kafka Clusters
+
+Follow the steps below to generate and compare reports between the existing Kafka cluster and the new Kafka cluster.
+
+Step 1: Prepare the property files
+
+Ensure you have separate Kafka property files for each cluster:
+
+One for the existing cluster
+
+One for the new cluster
+
+Each properties file should contain the correct Kafka broker details and security configurations for the respective cluster.
+
+Step 2: Run the script on the existing Kafka cluster
+
+Log in to the server with access to the existing Kafka cluster.
+
+Navigate to the directory containing the script.
+
+Execute the script using the existing cluster’s property file:
+
+sh Kafka_report.sh kafka_existing.properties
+
+
+Save the generated output files and clearly label them as Existing Cluster outputs.
+
+Step 3: Run the script on the new Kafka cluster
+
+Log in to the server with access to the new Kafka cluster.
+
+Navigate to the same script location.
+
+Execute the script using the new cluster’s property file:
+
+sh Kafka_report.sh kafka_new.properties
+
+
+Save the generated output files and clearly label them as New Cluster outputs.
+
+Step 4: Export output files to spreadsheets
+
+Open the provided spreadsheet template.
+
+Import the output files from the existing cluster into separate tabs.
+
+Import the output files from the new cluster into corresponding tabs.
+
+Ensure naming consistency so comparisons are easy to follow.
+
+Step 5: Compare the results
+
+Review the reports side by side and validate the following:
+
+Topic and partition counts match
+
+Message volumes are consistent
+
+Consumer group offsets and lag are aligned
+
+Retention settings and latest offsets are as expected
+
+Step 6: Validate and document findings
+
+Confirm there are no discrepancies or data gaps
+
+Document any differences observed and raise them with the platform or Kafka team if needed
+
+Proceed with the switchover only after validation is complete
