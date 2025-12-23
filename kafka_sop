@@ -1,87 +1,35 @@
-Kafka SOP
+1. Purpose
+
+This SOP describes how to use the Solr log analysis script to analyze Solr INFO logs and extract insights related to:
+
+Query patterns
+
+Sort patterns
+
+Query execution time (QTime)
+
+Collection-level performance behavior
+
+The report helps identify frequently executed queries, slow-running queries, and performance hotspots across Solr collections.
 
 
-This report is generated to compare the existing Kafka cluster with the new Kafka cluster during migration or validation activities. We run the same Kafka_report.sh script on both the existing cluster and the new cluster and then compare the outputs.
+Step 1: Gather the logs
 
-The comparison helps us identify any discrepancies, such as differences in:
+Collect the Solr INFO logs from all Solr nodes and place them in the directory configured in the script. The folder path is already defined in the main method, so make sure the logs are copied to that location before running the script.
 
-Topic counts or partition counts
+Step 2: Verify the log location in the script
 
-Message volumes
+Open the script and confirm that the folder path in the main method points to the correct directory where the logs are stored. Update the path only if the log location has changed.
 
-Consumer group offsets and lag
+Step 3: Run the script
 
-Retention settings
+Open a terminal, navigate to the directory where the script is located, and run it:
 
-By reviewing these reports side by side in a spreadsheet, we can confirm that the new cluster is aligned with the existing cluster and that there are no data gaps or unexpected behavior before fully switching over.
-
-
-Steps to Run the Report and Compare Kafka Clusters
-
-Follow the steps below to generate and compare reports between the existing Kafka cluster and the new Kafka cluster.
-
-Step 1: Prepare the property files
-
-Ensure you have separate Kafka property files for each cluster:
-
-One for the existing cluster
-
-One for the new cluster
-
-Each properties file should contain the correct Kafka broker details and security configurations for the respective cluster.
-
-Step 2: Run the script on the existing Kafka cluster
-
-Log in to the server with access to the existing Kafka cluster.
-
-Navigate to the directory containing the script.
-
-Execute the script using the existing cluster’s property file:
-
-sh Kafka_report.sh kafka_existing.properties
+python solr_log_analyzer.py
 
 
-Save the generated output files and clearly label them as Existing Cluster outputs.
+Since the log folder path is already configured in the script, no additional arguments are required.
 
-Step 3: Run the script on the new Kafka cluster
+Step 4: Review the output
 
-Log in to the server with access to the new Kafka cluster.
-
-Navigate to the same script location.
-
-Execute the script using the new cluster’s property file:
-
-sh Kafka_report.sh kafka_new.properties
-
-
-Save the generated output files and clearly label them as New Cluster outputs.
-
-Step 4: Export output files to spreadsheets
-
-Open the provided spreadsheet template.
-
-Import the output files from the existing cluster into separate tabs.
-
-Import the output files from the new cluster into corresponding tabs.
-
-Ensure naming consistency so comparisons are easy to follow.
-
-Step 5: Compare the results
-
-Review the reports side by side and validate the following:
-
-Topic and partition counts match
-
-Message volumes are consistent
-
-Consumer group offsets and lag are aligned
-
-Retention settings and latest offsets are as expected
-
-Step 6: Validate and document findings
-
-Confirm there are no discrepancies or data gaps
-
-Document any differences observed and raise them with the platform or Kafka team if needed
-
-Proceed with the switchover only after validation is complete
+After the script completes, review the generated output files. These files contain summarized query patterns, sort patterns, and QTime statistics grouped by collection.
